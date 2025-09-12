@@ -1,6 +1,7 @@
-"use client";
+// hooks/useSidebar.js
+'use client';
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 const SidebarContext = createContext();
 
@@ -17,6 +18,6 @@ export function SidebarProvider({ children }) {
 
 export function useSidebar() {
   const ctx = useContext(SidebarContext);
-  if (!ctx) throw new Error("useSidebar must be used inside SidebarProvider");
+  if (!ctx) throw new Error('useSidebar must be used inside SidebarProvider');
   return ctx;
 }

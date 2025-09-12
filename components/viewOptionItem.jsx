@@ -18,7 +18,12 @@ export default function ViewOptionItem({ item, collapsed, onClick }) {
         <div className='flex items-center gap-1 w-fit h-fit'>
           <div className='flex items-center justify-center w-[18px] h-[18px]'>
             {Icon ? (
-              <Icon strokeWidth={1.25} className='w-auto h-[10px] text-[#8e8e8e]' />
+              <Icon
+                strokeWidth={1.5}
+                className={`${
+                  item.id === 'sort' ? 'w-[13px] h-auto' : 'w-auto h-[12px]'
+                } text-[#8e8e8e]`}
+              />
             ) : item.icon ? (
               <img
                 src={item.icon}
@@ -29,7 +34,11 @@ export default function ViewOptionItem({ item, collapsed, onClick }) {
             ) : null}
           </div>
 
-          <span className='hidden lg:block text-[14px] font-medium text-[#d2d2d2] leading-none group-hover:text-white'>
+          <span
+            className={`${
+              item.id === 'filter' ? 'hidden md:block' : 'hidden lg:block'
+            } text-[12px] lg:text-[14px] font-medium text-[#d2d2d2] leading-none group-hover:text-white`}
+          >
             {item.label}
           </span>
         </div>

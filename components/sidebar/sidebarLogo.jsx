@@ -1,5 +1,7 @@
+// components/sidebar/sidebarLogo.jsx
 'use client';
 
+import OpenPanel from '@/assets/iconComponents/OpenPanel';
 import react from 'react';
 export default function SidebarLogo({ collapsed, hovered, onToggle }) {
   return (
@@ -23,7 +25,7 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
           <button
             aria-label='Collapse sidebar'
             onClick={onToggle}
-            className='p-2 rounded-md hover:bg-white/10 cursor-e-resize focus:outline-none focus:ring-2 focus:ring-white/20'
+            className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-white/10 cursor-e-resize focus:outline-none focus:ring-2 focus:ring-white/20'
             title='Collapse'
           >
             <img
@@ -42,16 +44,10 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
             <button
               aria-label='Expand sidebar'
               onClick={onToggle}
-              className='p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 cursor-e-resize'
+              className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-white/10 focus:outline-none cursor-e-resize'
               title='Expand'
             >
-              <img
-                src='/icons/OpenPanel.svg'
-                alt=''
-                aria-hidden='true'
-                className='w-[16px] h-[16px]'
-                draggable='false'
-              />
+              <OpenPanel className='w-[16px] h-[16px]' />
             </button>
           ) : (
             <img

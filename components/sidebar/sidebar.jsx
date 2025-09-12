@@ -1,3 +1,4 @@
+// components/sidebar/sidebar.jsx
 'use client';
 
 import { useState } from 'react';
@@ -18,7 +19,7 @@ export default function Sidebar() {
     <aside
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`${widthClass} bg-[#0a0a0a] transition-[width] duration-200 flex flex-col justify-between`}
+      className={`hidden lg:flex ${widthClass} bg-[#0a0a0a] transition-[width] duration-200 flex-col justify-between`}
     >
       <div className='space-y-4'>
         <SidebarLogo
