@@ -19,7 +19,7 @@ export default function Header() {
     <header className='w-full bg-transparent flex flex-col border-b gap-3 border-[#1f1f1f] px-6 pt-4 pb-4'>
       {/* Top bar */}
       <div className='flex justify-between items-center'>
-        <span className='text-white font-semibold text-[18px]'>All Issues</span>
+        <span className='text-white font-bold text-[18px]'>All Issues</span>
         <SearchBar />
       </div>
 
