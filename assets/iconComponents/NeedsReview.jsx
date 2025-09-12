@@ -1,0 +1,51 @@
+import React from "react";
+
+/**
+ * NeedsReview — auto-generated from SVG
+ * Props:
+ *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
+ *  - strokeWidth (number)
+ *  - strokeColor (string)
+ *  - fillColor (string)
+ *  - className (string)
+ */
+export default function NeedsReview({
+  width,
+  height,
+  strokeWidth = 2,
+  strokeColor = "currentColor",
+  fillColor = "none",
+  className,
+}) {
+  // original viewBox: 0 0 16 16
+  const aspectRatio = 16 / 16;
+
+  let computedWidth = 16;
+  let computedHeight = 16;
+
+  if (width != null && height == null) {
+    computedWidth = width;
+    computedHeight = Math.round(width / aspectRatio);
+  } else if (height != null && width == null) {
+    computedHeight = height;
+    computedWidth = Math.round(height * aspectRatio);
+  } else if (width != null && height != null) {
+    computedWidth = width;
+    computedHeight = height;
+  }
+
+  return (
+    <svg
+      width={computedWidth}
+      height={computedHeight}
+      viewBox="0 0 16 16"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      role="img"
+      aria-hidden={className ? "false" : "true"}
+    >
+      <path d="M8.00227 1C9.48723 1.00048 10.9336 1.47318 12.1322 2.34977C13.3308 3.22635 14.2196 4.4614 14.6701 5.87637C15.1206 7.29135 15.1094 8.81292 14.6383 10.2211C14.1671 11.6294 13.2603 12.8512 12.0489 13.7102C10.8376 14.5691 9.3845 15.0206 7.8997 14.9993C6.41489 14.978 4.97532 14.4851 3.7891 13.5918C2.60287 12.6985 1.73145 11.4511 1.30081 10.03C0.870177 8.60886 0.902634 7.08759 1.39349 5.68611L8.00227 8V1Z" fill={fillColor}/>
+      <path d="M1.0022 8C1.0022 8.91925 1.18326 9.82951 1.53504 10.6788C1.88682 11.5281 2.40244 12.2997 3.05245 12.9497C3.70246 13.5998 4.47413 14.1154 5.32341 14.4672C6.17269 14.8189 7.08294 15 8.0022 15C8.92145 15 9.8317 14.8189 10.681 14.4672C11.5303 14.1154 12.3019 13.5998 12.9519 12.9497C13.602 12.2997 14.1176 11.5281 14.4694 10.6788C14.8211 9.82951 15.0022 8.91925 15.0022 8C15.0022 6.14348 14.2647 4.36301 12.9519 3.05025C11.6392 1.7375 9.85871 1 8.0022 1C6.14568 1 4.3652 1.7375 3.05245 3.05025C1.7397 4.36301 1.0022 6.14348 1.0022 8Z" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}

@@ -1,0 +1,7 @@
+/* app/globals.css */
+@import 'tailwindcss';
+
+:root {
+  /* optional: expose variable name for other CSS usage (not required) */
+  --font-plus-jakarta-sans: var(--font-plus-jakarta-sans);
+}
