@@ -52,7 +52,7 @@ export default function MobileSidebar() {
         role='dialog'
         aria-modal='true'
         aria-label='Mobile sidebar'
-        className={`absolute border-r border-[#1f1f1f] left-0 top-0 bottom-0 w-72 bg-[#0b0b0b] transform transition-transform duration-200 ${
+        className={`max-h-[100dvh] absolute border-r border-[#1f1f1f] left-0 top-0 bottom-0 w-72 bg-[#0b0b0b] transform transition-transform duration-200 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         } flex flex-col`}
       >

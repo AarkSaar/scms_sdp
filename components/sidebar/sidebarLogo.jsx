@@ -25,16 +25,10 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
           <button
             aria-label='Collapse sidebar'
             onClick={onToggle}
-            className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-white/10 cursor-e-resize focus:outline-none focus:ring-2 focus:ring-white/20'
+            className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-[#1a1a1a] cursor-e-resize focus:outline-none'
             title='Collapse'
           >
-            <img
-              src='/icons/OpenPanel.svg'
-              alt='Collapse'
-              aria-hidden='true'
-              className='w-4 h-4'
-              draggable='false'
-            />
+            <OpenPanel className='w-[16px] h-[16px] text-[#8e8e8e]' />
           </button>
         </div>
       ) : (
@@ -44,10 +38,10 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
             <button
               aria-label='Expand sidebar'
               onClick={onToggle}
-              className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-white/10 focus:outline-none cursor-e-resize'
+              className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-[#1a1a1a] focus:outline-none cursor-e-resize'
               title='Expand'
             >
-              <OpenPanel className='w-[16px] h-[16px]' />
+              <OpenPanel className='w-[16px] h-[16px] text-[#8e8e8e]' />
             </button>
           ) : (
             <img

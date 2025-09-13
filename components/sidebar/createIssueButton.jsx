@@ -9,7 +9,8 @@ export default function CreateIssueButton({
   collapsed,
 }) {
   return (
-    <button
+    <a
+      href='/issues/create'
       type='button'
       onClick={onClick}
       aria-label={label}
@@ -42,6 +43,6 @@ export default function CreateIssueButton({
           {label}
         </span>
       )}
-    </button>
+    </a>
   );
 }

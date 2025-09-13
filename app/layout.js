@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang='en' className={`${plusJakarta.className} ${plusJakarta.variable} antialiased`}>
       <body>
         <SidebarProvider>
-          <div className='bg-[#0a0a0a] lg:p-2 h-[100dvh] flex'>
+          <div className='bg-[#0a0a0a] lg:p-2 h-[100dvh] flex gap-x-2'>
             {/* Desktop sidebar: hidden below lg */}
             <div className='hidden lg:flex'>
               <Sidebar />

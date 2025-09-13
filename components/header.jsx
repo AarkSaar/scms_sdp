@@ -7,13 +7,13 @@ import ViewTabs from './viewTabs';
 import ViewOptionItem from './viewOptionItem';
 import Columns from '@/assets/iconComponents/Columns';
 import Filter from '@/assets/iconComponents/Filter';
-import Filter2 from '@/assets/iconComponents/Filter2';
 import Equals from '@/assets/iconComponents/Equals';
+import UpDownArrow from '@/assets/iconComponents/UpDownArrow';
 
 const viewOptionItems = [
   { id: 'group', label: 'Grouping', dropdown: true, Icon: Columns },
-  { id: 'sort', label: 'Ordering', dropdown: true, Icon: Filter },
-  { id: 'filter', label: 'Filter', dropdown: false, Icon: Filter2 },
+  { id: 'sort', label: 'Ordering', dropdown: true, Icon: UpDownArrow },
+  { id: 'filter', label: 'Filter', dropdown: false, Icon: Filter },
 ];
 
 export default function Header() {
@@ -32,7 +32,7 @@ export default function Header() {
           >
             <Equals strokeWidth={1.25} className={`w-4 md:w-5 h-auto`} />
           </div>
-          <span className='text-white font-bold text-[18px]'>All Issues</span>
+          <span className='text-white inline font-bold text-[16px] lg:text-[18px]'>All Issues</span>
         </div>
         <SearchBar />
       </div>

@@ -21,7 +21,7 @@ export default function ViewOptionItem({ item, collapsed, onClick }) {
               <Icon
                 strokeWidth={1.5}
                 className={`${
-                  item.id === 'sort' ? 'w-[13px] h-auto' : 'w-auto h-[12px]'
+                  item.id === 'sort' || item.id === 'filter' ? 'w-[13px] h-auto' : 'w-auto h-[12px]'
                 } text-[#8e8e8e]`}
               />
             ) : item.icon ? (
@@ -37,7 +37,7 @@ export default function ViewOptionItem({ item, collapsed, onClick }) {
           <span
             className={`${
               item.id === 'filter' ? 'hidden md:block' : 'hidden lg:block'
-            } text-[12px] lg:text-[14px] font-medium text-[#d2d2d2] leading-none group-hover:text-white`}
+            } text-[12px] font-medium text-[#d2d2d2] leading-none group-hover:text-white`}
           >
             {item.label}
           </span>
