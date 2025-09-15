@@ -24,13 +24,10 @@ export default function StatusBadge({ id, badge, small = false, className = '' }
     >
       {/* small colored dot */}
       <span
-        className='w-2.5 h-2.5 rounded-full shrink-0'
+        className='flex items-center justify-center w-3.5 h-3.5 rounded-sm shrink-0'
         aria-hidden='true'
-        style={{ background: b.iconColor }}
       >
-        {Icon ? (
-          <Icon strokeColor='none' fillColor={b.iconColor} className='w-auto h-[12px]' />
-        ) : null}
+        {Icon ? <Icon strokeColor={b.iconColor} className='w-auto h-[13px]' /> : null}
       </span>
       {!small && <span className='leading-[20px] select-none'>{b.label}</span>}
     </div>

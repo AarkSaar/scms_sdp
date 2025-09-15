@@ -1,8 +1,8 @@
 // app/layout.js
 import './globals.css';
 import { SidebarProvider } from '../hooks/useSidebar';
-import Sidebar from '../components/sidebar/sidebar';
-import MobileSidebar from '../components/sidebar/sidebarMobile';
+import Sidebar from '@/components/sidebar/sidebar';
+import MobileSidebar from '@/components/sidebar/sidebarMobile';
 
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
@@ -17,18 +17,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en' className={`${plusJakarta.className} ${plusJakarta.variable} antialiased`}>
       {/* Use full screen/viewport sizing here */}
-      <body className='h-screen w-screen'>
+      <body className='h-screen max-h-[100dvh] max-w-screen'>
         <SidebarProvider>
           {/* root container fills the screen */}
-          <div className='h-full w-full flex gap-x-2 bg-[#0a0a0a] lg:p-2'>
+          <div className='h-full max-w-full flex gap-x-2 bg-[#0a0a0a] lg:p-2'>
             {/* Desktop sidebar wrapper (hidden below lg). make it full height */}
             <div className='hidden lg:flex h-full'>
               <Sidebar />
             </div>
 
             {/* Content column: allow it to grow and shrink; internal scrolling will happen in main */}
-            <div className='flex-1 min-h-0 flex flex-col'>
-              <main className='flex-1 min-h-0 overflow-auto rounded-[4px] bg-[#101010] border border-[#1a1a1a]'>
+            <div className='flex-1 min-h-0 min-w-0 flex flex-col w-full'>
+              {/* main is the scroll host for the page; ensure it doesn't expand parent */}
+              <main className='flex-1 min-h-0 min-w-0 w-full overflow-hidden rounded-[4px] bg-[#101010] border border-[#161616]'>
                 {children}
               </main>
             </div>

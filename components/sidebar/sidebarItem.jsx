@@ -32,7 +32,7 @@ export default function SidebarItem({ item, collapsed, onClick }) {
         </div>
 
         {!collapsed && (
-          <span className='text-[14px] font-medium text-[#d2d2d2] leading-none group-hover:text-white'>
+          <span className='text-[14px] line-clamp-1 font-medium text-[#d2d2d2] leading-none group-hover:text-white'>
             {item.label}
           </span>
         )}

@@ -14,11 +14,11 @@ export default function ProfileStack({ assignees = [], maxVisible = 3 }) {
   const remaining = Math.max(0, assignees.length - maxVisible);
 
   return (
-    <div className='flex items-center -space-x-2'>
+    <div className='flex items-center -space-x-2.5'>
       {visible.map((p, idx) => (
         <div
           key={p.id ?? `${p.name}-${idx}`}
-          className='w-7 h-7 rounded-[6px] overflow-hidden ring-0 border-0 bg-[#2b2b2b] flex items-center justify-center'
+          className='w-7 h-7 rounded-full overflow-hidden ring-0 border-[1.75px] border-[#161616] bg-[#2b2b2b] flex items-center justify-center'
           title={p.name}
           style={{ zIndex: visible.length - idx }}
         >
@@ -26,7 +26,7 @@ export default function ProfileStack({ assignees = [], maxVisible = 3 }) {
             <img src={p.avatarUrl} alt={p.name} className='w-full h-full object-cover' />
           ) : (
             // fallback initials
-            <span className='text-[10px] font-semibold text-white select-none'>
+            <span className='text-[8px] font-semibold text-white select-none'>
               {p.name
                 ? p.name
                     .split(' ')
@@ -41,9 +41,9 @@ export default function ProfileStack({ assignees = [], maxVisible = 3 }) {
 
       {remaining > 0 && (
         <div
-          className='w-7 h-7 rounded-[6px] bg-[#111111] border border-[#2b2b2b] text-[10px] font-semibold flex items-center justify-center text-[#bdbdbd]'
+          className='w-7 h-7 rounded-full border-[1.55px] border-[#2b2b2b] text-[8px] font-bold flex items-center justify-end text-[#bdbdbd] p-1.5'
           title={`${remaining} more`}
-          style={{ marginLeft: -8 }}
+          style={{ marginLeft: -0 }}
         >
           +{remaining}
         </div>

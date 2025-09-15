@@ -1,0 +1,506 @@
+[
+  {
+    "id": "issue-001",
+    "badgeSet": { "priority": "low", "department": "capital_projects", "status": "needs_review" },
+    "title": "Insufficient Shuttle Buses During Peak Hours",
+    "description": "Morning and evening peak hours (7:30–9:00 AM and 5–6 PM) have long queues at bus stops, with many students left stranded.",
+    "dateRange": "01 Sep - 03 Sep",
+    "assignees": [
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" },
+      { "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" },
+      { "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-002",
+    "badgeSet": { "priority": "medium", "department": "transport", "status": "assigned" },
+    "title": "Broken Shelter at Bus Stop A",
+    "description": "Bus stop shelter by gate A has broken glass and exposed metal — risk to commuters.",
+    "dateRange": "04 Sep - 06 Sep",
+    "assignees": [
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" },
+      { "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-003",
+    "badgeSet": { "priority": "urgent", "department": "health", "status": "in_progress" },
+    "title": "Contaminated Water Source in Dorm 5",
+    "description": "Students report foul smell and stomach issues after drinking from the dorm water taps.",
+    "dateRange": "05 Sep - 05 Sep",
+    "assignees": [{ "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-004",
+    "badgeSet": { "priority": "low", "department": "academics", "status": "needs_review" },
+    "title": "Broken Projector in Lecture Hall 2",
+    "description": "Projector flickers and causes class disruptions during presentations.",
+    "dateRange": "07 Sep - 08 Sep",
+    "assignees": [{ "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-005",
+    "badgeSet": { "priority": "not_set", "department": "special_events", "status": "assigned" },
+    "title": "Insufficient Chairs for Orientation",
+    "description": "Orientation event lacking enough seating for attendees.",
+    "dateRange": "09 Sep - 09 Sep",
+    "assignees": [
+      { "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" },
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-006",
+    "badgeSet": { "status": "pending" },
+    "title": "Request: Additional Lighting in Dorm Corridors",
+    "description": "Students request additional motion-sensor lights in dorm corridors for safety.",
+    "dateRange": "10 Sep - 10 Sep",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-007",
+    "badgeSet": { "priority": "medium", "department": "public_relations", "status": "in_progress" },
+    "title": "Website Event Page Not Updating",
+    "description": "Event details posted are not reflecting updates made by admins.",
+    "dateRange": "11 Sep - 12 Sep",
+    "assignees": [{ "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-008",
+    "badgeSet": { "priority": "urgent", "department": "transport", "status": "in_progress" },
+    "title": "Multiple Shuttle Delays",
+    "description": "Shuttle service experiencing delays due to driver shortages.",
+    "dateRange": "12 Sep - 13 Sep",
+    "assignees": [
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" },
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-009",
+    "badgeSet": { "priority": "low", "department": "finance", "status": "needs_review" },
+    "title": "Reimbursement Delay for Club Expenses",
+    "description": "Club treasurer reports delayed reimbursements for approved expenses.",
+    "dateRange": "13 Sep - 14 Sep",
+    "assignees": [{ "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-010",
+    "badgeSet": { "status": "pending" },
+    "title": "Suggestion: More Recycling Bins",
+    "description": "Request for additional recycling bins across campus.",
+    "dateRange": "15 Sep - 15 Sep",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-011",
+    "badgeSet": { "priority": "medium", "department": "capital_projects", "status": "assigned" },
+    "title": "Cracked Pavement Near Library Entrance",
+    "description": "Large cracks forming on the walkway — trip hazard.",
+    "dateRange": "16 Sep - 18 Sep",
+    "assignees": [
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" },
+      { "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-012",
+    "badgeSet": { "priority": "urgent", "department": "health", "status": "in_progress" },
+    "title": "Food Poisoning Reports in Dining Hall B",
+    "description": "Several students reported illness after meals; investigation required.",
+    "dateRange": "18 Sep - 19 Sep",
+    "assignees": [{ "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-013",
+    "badgeSet": { "status": "pending" },
+    "title": "Proposal: Evening Shuttle Route Extension",
+    "description": "Proposal to extend shuttle hours during exam periods.",
+    "dateRange": "20 Sep - 20 Sep",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-014",
+    "badgeSet": { "priority": "low", "department": "sports", "status": "needs_review" },
+    "title": "Gym Equipment Repair",
+    "description": "Treadmill in gym C needs maintenance; belt slipping.",
+    "dateRange": "21 Sep - 22 Sep",
+    "assignees": [{ "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-015",
+    "badgeSet": { "priority": "medium", "department": "special_events", "status": "assigned" },
+    "title": "Stage Setup Missing Microphones",
+    "description": "Event stage missing microphones and PA cables.",
+    "dateRange": "22 Sep - 22 Sep",
+    "assignees": [
+      { "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" },
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-016",
+    "badgeSet": { "priority": "low", "department": "transport", "status": "resolved" },
+    "title": "Missing Route Timetable Posted",
+    "description": "Printed timetable at stop C was missing; staff replaced it.",
+    "dateRange": "23 Sep - 23 Sep",
+    "assignees": [{ "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-017",
+    "badgeSet": { "status": "pending" },
+    "title": "Request: Quiet Study Tables in Cafeteria",
+    "description": "Students request reserved quiet tables in the cafeteria during exam weeks.",
+    "dateRange": "24 Sep - 24 Sep",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-018",
+    "badgeSet": { "priority": "urgent", "department": "capital_projects", "status": "assigned" },
+    "title": "Leaking Roof Above Lab 4",
+    "description": "Water leaking during rain; immediate roof inspection required.",
+    "dateRange": "25 Sep - 26 Sep",
+    "assignees": [
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" },
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-019",
+    "badgeSet": {
+      "priority": "medium",
+      "department": "internal_affairs",
+      "status": "needs_review"
+    },
+    "title": "Access Badge System Intermittent",
+    "description": "Card readers occasionally fail to grant access despite valid credentials.",
+    "dateRange": "27 Sep - 28 Sep",
+    "assignees": [{ "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-020",
+    "badgeSet": { "status": "pending" },
+    "title": "Suggestion: More Charging Stations",
+    "description": "Request for more laptop charging points across study areas.",
+    "dateRange": "29 Sep - 29 Sep",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-021",
+    "badgeSet": { "priority": "low", "department": "public_relations", "status": "assigned" },
+    "title": "Banner Graphics Incorrect Date",
+    "description": "Promotional banner shows old event date; needs correction.",
+    "dateRange": "30 Sep - 30 Sep",
+    "assignees": [{ "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-022",
+    "badgeSet": { "priority": "urgent", "department": "health", "status": "in_progress" },
+    "title": "Vermin Sightings in Food Prep Area",
+    "description": "Reports of vermin in kitchen storage; requires immediate action.",
+    "dateRange": "01 Oct - 02 Oct",
+    "assignees": [{ "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-023",
+    "badgeSet": { "priority": "not_set", "department": "multiple", "status": "needs_review" },
+    "title": "Cross-department Coordination Needed for Campus Fair",
+    "description": "Organizers request coordination between events, security, and facilities.",
+    "dateRange": "03 Oct - 04 Oct",
+    "assignees": [
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" },
+      { "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" },
+      { "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-024",
+    "badgeSet": { "status": "pending" },
+    "title": "Request: More Mentorship Sessions",
+    "description": "Student body requests additional mentorship hours for final-year projects.",
+    "dateRange": "05 Oct - 05 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-025",
+    "badgeSet": { "priority": "medium", "department": "finance", "status": "assigned" },
+    "title": "Budget Approval Delay for Student Club",
+    "description": "Club's budget request awaiting finance approval longer than expected.",
+    "dateRange": "06 Oct - 07 Oct",
+    "assignees": [{ "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-026",
+    "badgeSet": { "priority": "low", "department": "academics", "status": "resolved" },
+    "title": "Syllabus Update Missing Topic",
+    "description": "Course syllabus missing a recently added topic; professor updated materials.",
+    "dateRange": "08 Oct - 08 Oct",
+    "assignees": [{ "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-027",
+    "badgeSet": { "status": "pending" },
+    "title": "Suggestion: Outdoor Study Benches",
+    "description": "Propose installing shaded benches for outdoor study.",
+    "dateRange": "09 Oct - 09 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-028",
+    "badgeSet": { "priority": "urgent", "department": "capital_projects", "status": "in_progress" },
+    "title": "Electrical Short in Lab Wing",
+    "description": "Sparks reported in the electrical panel; safety hazard.",
+    "dateRange": "10 Oct - 11 Oct",
+    "assignees": [
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" },
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-029",
+    "badgeSet": { "priority": "medium", "department": "transport", "status": "needs_review" },
+    "title": "Inconsistent Shuttle Stop Labels",
+    "description": "Some shuttle stops labeled incorrectly causing confusion.",
+    "dateRange": "12 Oct - 12 Oct",
+    "assignees": [{ "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-030",
+    "badgeSet": { "status": "pending" },
+    "title": "Poll: Preferred Cafeteria Menu Options",
+    "description": "Request to survey students on preferred menu items.",
+    "dateRange": "13 Oct - 13 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-031",
+    "badgeSet": { "priority": "low", "department": "public_relations", "status": "assigned" },
+    "title": "Social Media Post Not Scheduling",
+    "description": "Scheduled posts failing to publish on official channels.",
+    "dateRange": "14 Oct - 14 Oct",
+    "assignees": [
+      { "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" },
+      { "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-032",
+    "badgeSet": { "priority": "urgent", "department": "health", "status": "assigned" },
+    "title": "Outbreak Monitoring in Dormitory C",
+    "description": "Several students showing similar symptoms; monitoring community spread.",
+    "dateRange": "15 Oct - 16 Oct",
+    "assignees": [{ "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-033",
+    "badgeSet": { "priority": "not_set", "department": "unassigned", "status": "needs_review" },
+    "title": "Unassigned Maintenance Request",
+    "description": "A maintenance request was created but not categorized yet.",
+    "dateRange": "16 Oct - 16 Oct",
+    "assignees": [{ "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-034",
+    "badgeSet": { "status": "pending" },
+    "title": "Suggestion: Bike Rack Expansion",
+    "description": "Students request additional secure bike storage near lecture halls.",
+    "dateRange": "17 Oct - 17 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-035",
+    "badgeSet": { "priority": "medium", "department": "transport", "status": "in_progress" },
+    "title": "Parking Lot Lighting Fault",
+    "description": "Some lights in Lot D are out; night safety concern.",
+    "dateRange": "18 Oct - 19 Oct",
+    "assignees": [{ "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-036",
+    "badgeSet": { "priority": "low", "department": "academics", "status": "assigned" },
+    "title": "Request for Additional Course Slots",
+    "description": "Students request more slots for core elective due to high demand.",
+    "dateRange": "20 Oct - 21 Oct",
+    "assignees": [{ "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-037",
+    "badgeSet": { "status": "pending" },
+    "title": "Feedback: Evening Shuttle Frequency Survey",
+    "description": "Collect data on evening rider needs to adjust schedules.",
+    "dateRange": "22 Oct - 22 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-038",
+    "badgeSet": {
+      "priority": "urgent",
+      "department": "capital_projects",
+      "status": "needs_review"
+    },
+    "title": "Structural Crack in Annex Wall",
+    "description": "Visible crack widening over several weeks; engineering review needed.",
+    "dateRange": "23 Oct - 25 Oct",
+    "assignees": [
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" },
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-039",
+    "badgeSet": { "priority": "medium", "department": "public_relations", "status": "resolved" },
+    "title": "Alumni Newsletter Missing Attachments",
+    "description": "Email newsletter sent without promised pdf attachments; corrected.",
+    "dateRange": "26 Oct - 26 Oct",
+    "assignees": [{ "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-040",
+    "badgeSet": { "status": "pending" },
+    "title": "Request: Improved Signage Between Halls",
+    "description": "New students frequently get lost; signage proposal submitted.",
+    "dateRange": "27 Oct - 27 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-041",
+    "badgeSet": { "priority": "low", "department": "food_and_hygiene", "status": "assigned" },
+    "title": "Hand Soap Dispensers Empty in Restrooms",
+    "description": "Regular refill schedule requested for hygiene supplies.",
+    "dateRange": "28 Oct - 28 Oct",
+    "assignees": [{ "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-042",
+    "badgeSet": { "priority": "medium", "department": "finance", "status": "needs_review" },
+    "title": "Invoice Discrepancy for Vendor P",
+    "description": "Vendor invoice totals do not match purchase order amounts.",
+    "dateRange": "29 Oct - 30 Oct",
+    "assignees": [{ "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-043",
+    "id": "issue-043",
+    "badgeSet": { "status": "pending" },
+    "title": "Suggestion: Weekend Shuttle Routes",
+    "description": "Consider weekend shuttle routes for students on campus during events.",
+    "dateRange": "31 Oct - 31 Oct",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-044",
+    "badgeSet": { "priority": "urgent", "department": "transport", "status": "assigned" },
+    "title": "Bus Breakdown on Main Route",
+    "description": "Bus broke down midday causing delays; tow and replacement arranged.",
+    "dateRange": "01 Nov - 01 Nov",
+    "assignees": [
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" },
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-045",
+    "badgeSet": { "priority": "low", "department": "academics", "status": "needs_review" },
+    "title": "Lab Equipment Calibration Reminder",
+    "description": "Calibration due for measuring equipment in physics lab.",
+    "dateRange": "02 Nov - 03 Nov",
+    "assignees": [{ "id": "u5", "name": "Eve Carter", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-046",
+    "badgeSet": { "priority": "not_set", "department": "unassigned", "status": "needs_review" },
+    "title": "Uncategorized Request From Student Council",
+    "description": "Student council submitted a request that needs classification.",
+    "dateRange": "04 Nov - 04 Nov",
+    "assignees": [{ "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-047",
+    "badgeSet": { "status": "pending" },
+    "title": "Request: Campus Map Updates",
+    "description": "Map kiosks need updated directories for new buildings.",
+    "dateRange": "05 Nov - 05 Nov",
+    "assignees": [],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-048",
+    "badgeSet": { "priority": "medium", "department": "transport", "status": "in_progress" },
+    "title": "Route Signage Faded at Stop D",
+    "description": "Signs require replacement for better visibility.",
+    "dateRange": "06 Nov - 07 Nov",
+    "assignees": [
+      { "id": "u2", "name": "Bob Martin", "avatarUrl": "/images/man.png" },
+      { "id": "u4", "name": "Dan Wu", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  },
+  {
+    "id": "issue-049",
+    "badgeSet": { "priority": "low", "department": "sports", "status": "resolved" },
+    "title": "Court Reservation System Bug",
+    "description": "Reservation system double-books timeslots; admin fixed bug.",
+    "dateRange": "08 Nov - 08 Nov",
+    "assignees": [{ "id": "u3", "name": "Cara Diaz", "avatarUrl": "/images/man.png" }],
+    "mediaUrl": null
+  },
+  {
+    "id": "issue-050",
+    "badgeSet": { "priority": "urgent", "department": "health", "status": "assigned" },
+    "title": "Mandatory Health Screening Logistics",
+    "description": "Organizing logistics for mandatory screening—space and staffing needed.",
+    "dateRange": "09 Nov - 10 Nov",
+    "assignees": [
+      { "id": "u6", "name": "Frank Lin", "avatarUrl": "/images/man.png" },
+      { "id": "u7", "name": "Grace Park", "avatarUrl": "/images/man.png" },
+      { "id": "u1", "name": "Alice Johnson", "avatarUrl": "/images/man.png" }
+    ],
+    "mediaUrl": "/images/bus.png"
+  }
+]

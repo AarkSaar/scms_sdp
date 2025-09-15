@@ -2,9 +2,9 @@
 import React from 'react';
 import ProfileStack from './ProfileStack';
 
-import PriorityBadge from '../Shared/Badges/PriorityBadge';
-import DepartmentBadge from '../Shared/Badges/DepartmentBadge';
-import StatusBadge from '../Shared/Badges/StatusBadge';
+import PriorityBadge from '../../../Shared/Badges/PriorityBadge';
+import DepartmentBadge from '../../../Shared/Badges/DepartmentBadge';
+import StatusBadge from '../../../Shared/Badges/StatusBadge';
 import Calendar from '@/assets/iconComponents/Calendar';
 
 /**
@@ -61,10 +61,10 @@ export default function IssueBoardCard({
       <div className='flex-1 bg-[#161616] px-4 py-3 flex flex-col justify-between'>
         <div className='space-y-2'>
           {/* simplified badges row: priority, department, status */}
-          <div className='flex items-center gap-2'>
+          <div className='flex flex-wrap items-center gap-2'>
             {priorityId ? <PriorityBadge id={priorityId} /> : null}
             {departmentId ? <DepartmentBadge id={departmentId} /> : null}
-            {/* {statusId ? <StatusBadge id={statusId} /> : null} */}
+            {statusId ? <StatusBadge id={statusId} /> : null}
           </div>
 
           {/* title */}

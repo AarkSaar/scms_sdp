@@ -39,7 +39,7 @@ export default function CreateIssueButton({
 
       {/* label only when expanded; it takes remaining space and stays centered */}
       {!collapsed && (
-        <span className='flex-1 text-[14px] font-bold text-[#0A0A0A] text-center leading-none'>
+        <span className='flex-1 line-clamp-1 text-[14px] font-bold text-[#0A0A0A] text-center leading-none'>
           {label}
         </span>
       )}

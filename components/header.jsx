@@ -1,7 +1,7 @@
 // components/Header.jsx
 'use client';
 
-import { useSidebar } from '../hooks/useSidebar'; // adjust path if needed
+import { useSidebar } from '../hooks/useSidebar';
 import SearchBar from './searchBar';
 import ViewTabs from './viewTabs';
 import ViewOptionItem from './viewOptionItem';
@@ -20,7 +20,8 @@ export default function Header() {
   const { setMobileOpen } = useSidebar();
 
   return (
-    <header className='w-full bg-transparent flex flex-col border-b gap-2 lg:gap-3 border-[#1f1f1f] px-6 pt-4 pb-4'>
+    // non-scrolling header, fixed height within page column
+    <header className='w-full flex-shrink-0 flex flex-col border-b gap-2 lg:gap-3 border-[#1f1f1f] px-6 pt-4 pb-4 bg-transparent'>
       {/* Top bar */}
       <div className='flex justify-between items-center'>
         <div className='flex gap-x-2 items-center w-fit'>
@@ -39,8 +40,7 @@ export default function Header() {
 
       {/* Bottom bar */}
       <div className='flex justify-between items-center'>
-        {/* Left toggle group */}
-        <div className=''>
+        <div>
           <ViewTabs />
         </div>
 
