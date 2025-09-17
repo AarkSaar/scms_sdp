@@ -56,16 +56,14 @@ export default function BoardView({ issues = issuesData, groupBy = 'status' }) {
   }, [issues, groupBy]);
 
   return (
-    <div className='h-full w-full flex flex-col min-h-0'>
-      {/* prevent vertical scrolling here; allow only horizontal scroll */}
-      <div className='flex-1 min-h-0 overflow-x-auto overflow-y-hidden hide-scrollbar'>
-        <div className='inline-flex items-start'>
-          {groups.map((g) => (
-            <div key={g.key} className='flex-shrink-0'>
-              <IssueBoardGroup groupKey={g.key} issues={g.items} groupBy={groupBy} title={g.key} />
-            </div>
-          ))}
-        </div>
+    <div className='h-full w-full overflow-x-auto overflow-y-hidden hide-scrollbar'>
+      {/* flex container with full height to pass down to children */}
+      <div className='inline-flex h-full min-w-max'>
+        {groups.map((g) => (
+          <div key={g.key} className='h-full flex-shrink-0'>
+            <IssueBoardGroup groupKey={g.key} issues={g.items} groupBy={groupBy} title={g.key} />
+          </div>
+        ))}
       </div>
     </div>
   );

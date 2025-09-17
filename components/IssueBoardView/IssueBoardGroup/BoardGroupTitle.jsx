@@ -35,6 +35,7 @@ export default function BoardGroupTitle({
             {/* pass className to Icon for sizing and use inline styles to color it */}
             <Icon
               className='w-[14px] h-[14px]'
+              strokeWidth={1.75}
               style={
                 iconColor ? { color: iconColor, stroke: iconColor, fill: iconColor } : undefined
               }

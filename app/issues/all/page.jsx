@@ -7,7 +7,7 @@ export default function IssuesAllPage() {
     <div className='flex flex-col w-full min-w-0 h-full min-h-0'>
       <Header />
 
-      <div className='flex-1 p-3 overflow-hidden'>
+      <div className='flex-1 p-3 overflow-hidden h-full'>
         <BoardView />
       </div>
     </div>

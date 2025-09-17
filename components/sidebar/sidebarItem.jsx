@@ -1,15 +1,21 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
-export default function SidebarItem({ item, collapsed, onClick }) {
+export default function SidebarItem({ item, collapsed, onClick, active = false }) {
   const Icon = item.Icon;
 
+  // When active: icon + label should be white
+  const iconColorClass = active ? 'text-white' : 'text-[#8e8e8e]';
+  const labelClass = active ? 'text-white' : 'text-[#c9c9c9]';
+  const activeBg = active ? 'bg-[#1f1f1f]' : '';
+
   return (
-    <a
+    <Link
       href={item.href}
       onClick={onClick}
-      className={`flex items-center px-4 py-2 hover:bg-[#1a1a1a] ${
+      className={`flex items-center px-4 py-2 ${activeBg} hover:bg-[#1a1a1a] ${
         collapsed ? 'justify-center' : 'gap-3'
       } group`} // add "group" to use group-hover
     >
@@ -19,7 +25,7 @@ export default function SidebarItem({ item, collapsed, onClick }) {
           {Icon ? (
             <Icon
               strokeWidth={item.label === 'My issues' ? 3 : 1.25}
-              className='w-auto h-[16px] text-[#8e8e8e]'
+              className={`w-auto h-[16px] ${iconColorClass}`}
             />
           ) : item.icon ? (
             <img
@@ -32,11 +38,13 @@ export default function SidebarItem({ item, collapsed, onClick }) {
         </div>
 
         {!collapsed && (
-          <span className='text-[14px] line-clamp-1 font-medium text-[#d2d2d2] leading-none group-hover:text-white'>
+          <span
+            className={`text-[14px] line-clamp-1 ${labelClass} leading-none group-hover:text-white font-medium`}
+          >
             {item.label}
           </span>
         )}
       </div>
-    </a>
+    </Link>
   );
 }

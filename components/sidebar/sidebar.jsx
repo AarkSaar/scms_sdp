@@ -8,12 +8,19 @@ import SidebarLogo from './sidebarLogo';
 import navItems from '../../lib/navItems';
 import Expand from '@/assets/iconComponents/Expand';
 import CreateIssueButton from './createIssueButton';
+import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
   const { collapsed, setCollapsed } = useSidebar();
   const [hovered, setHovered] = useState(false);
-
+  const pathname = usePathname();
   const widthClass = collapsed ? 'w-14' : 'w-56';
+
+  // helper to decide if a nav item is active
+  const isActive = (href) => {
+    if (!href) return false;
+    return pathname === href || pathname.startsWith(href + '/');
+  };
 
   return (
     <aside
@@ -38,7 +45,7 @@ export default function Sidebar() {
             )}
             <div className='space-y-[4px]'>
               {navItems.slice(0, 2).map((i) => (
-                <SidebarItem key={i.id} item={i} collapsed={collapsed} />
+                <SidebarItem key={i.id} item={i} collapsed={collapsed} active={isActive(i.href)} />
               ))}
             </div>
           </div>
@@ -48,7 +55,7 @@ export default function Sidebar() {
             )}
             <div className='space-y-[4px]'>
               {navItems.slice(2).map((i) => (
-                <SidebarItem key={i.id} item={i} collapsed={collapsed} />
+                <SidebarItem key={i.id} item={i} collapsed={collapsed} active={isActive(i.href)} />
               ))}
             </div>
           </div>

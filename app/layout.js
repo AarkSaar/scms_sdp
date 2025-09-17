@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
             {/* Content column: allow it to grow and shrink; internal scrolling will happen in main */}
             <div className='flex-1 min-h-0 min-w-0 flex flex-col w-full'>
               {/* main is the scroll host for the page; ensure it doesn't expand parent */}
-              <main className='flex-1 min-h-0 min-w-0 w-full overflow-hidden rounded-[4px] bg-[#101010] border border-[#161616]'>
+              <main className='flex-1 min-h-0 h-full min-w-0 w-full overflow-hidden rounded-[4px] bg-[#101010] border border-[#161616]'>
                 {children}
               </main>
             </div>

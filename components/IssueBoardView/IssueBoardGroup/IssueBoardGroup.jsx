@@ -37,25 +37,17 @@ export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy 
 
   return (
     <section
-      className='w-[288px] max-w-[288px] flex-shrink-0 flex flex-col h-full min-h-0'
+      className='w-[288px] max-w-[288px] flex-shrink-0 flex flex-col h-full'
       aria-label={`${humanLabel} group`}
     >
-      {/* sticky header: not affected by vertical scroll of the cards list */}
-      <div className='sticky top-0 z-10 h-fit bg-[#101010]'>
+      {/* header: fixed height, not scrollable */}
+      <div className='flex-shrink-0 bg-[#101010]'>
         <BoardGroupTitle label={humanLabel} count={issues.length} Icon={Icon} />
       </div>
 
-      {/* cards list fills remaining height and scrolls vertically */}
-      <div className='p-2 flex-1 gap-0 min-h-0'>
-        {/* 
-          - overflow-y-auto: only scrolls when needed
-          - overscroll-contain: prevents scroll chaining to ancestors (important)
-          - touch-action: pan-y ensures touch gestures are interpreted as vertical pans inside this container
-        */}
-        <div
-          className='flex flex-col w-full overflow-y-auto hide-scrollbar justify-center gap-y-2 overscroll-contain'
-          style={{ touchAction: 'pan-y' }}
-        >
+      {/* cards list: takes remaining height and scrolls vertically */}
+      <div className='flex-1 overflow-y-auto overflow-x-hidden p-2 min-h-0 hide-scrollbar'>
+        <div className='flex flex-col w-full gap-y-2'>
           {issues.map((issue) => (
             <IssueBoardCard
               key={issue.id}
