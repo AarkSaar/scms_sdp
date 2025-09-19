@@ -14,7 +14,7 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
           <img
             src='/icons/logo_name.svg'
             alt='Logo'
-            className='h-7 w-auto select-none'
+            className='h-8 w-auto select-none'
             draggable='false'
           />
 
@@ -25,10 +25,10 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
           <button
             aria-label='Collapse sidebar'
             onClick={onToggle}
-            className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-[#1a1a1a] cursor-e-resize focus:outline-none'
+            className='w-7 h-7 flex items-center justify-center rounded-[8px] text-[#8e8e8e] hover:bg-[#1a1a1a] focus:bg-[#1f1f1f] focus:text-white focus:outline-none cursor-e-resize'
             title='Collapse'
           >
-            <OpenPanel className='w-[16px] h-[16px] text-[#8e8e8e]' />
+            <OpenPanel className='w-[16px] h-[16px]' />
           </button>
         </div>
       ) : (
@@ -38,16 +38,16 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
             <button
               aria-label='Expand sidebar'
               onClick={onToggle}
-              className='w-6 h-6 flex items-center justify-center rounded-md hover:bg-[#1a1a1a] focus:outline-none cursor-e-resize'
+              className='w-7 h-7 flex items-center justify-center rounded-[8px] text-[#8e8e8e] hover:bg-[#1a1a1a] focus:bg-[#1f1f1f] focus:text-white focus:outline-none cursor-e-resize'
               title='Expand'
             >
-              <OpenPanel className='w-[16px] h-[16px] text-[#8e8e8e]' />
+              <OpenPanel className='w-[16px] h-[16px]' />
             </button>
           ) : (
             <img
               src='/icons/Logo.svg'
               alt='App logo'
-              className='h-[28px] w-auto'
+              className='h-[32px] w-auto'
               draggable='false'
             />
           )}

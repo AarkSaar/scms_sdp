@@ -17,7 +17,7 @@ export default function StatusBadge({ id, badge, small = false, className = '' }
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-2 py-0.5 border-[1.5px] border-[#2a2a2a] rounded-full text-[10px] font-semibold ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 border-[1.25px] border-[#2a2a2a] rounded-full text-[10px] font-semibold ${className}`}
       style={{ color: '#fff', background: 'transparent' }}
       role='status'
       aria-label={b.label}

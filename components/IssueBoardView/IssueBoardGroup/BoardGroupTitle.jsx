@@ -24,7 +24,7 @@ export default function BoardGroupTitle({
 
   return (
     <div
-      className={`flex items-center justify-between h-fit pb-1 px-3 ${className}`}
+      className={`flex items-center justify-between h-fit pb-2 px-2 ${className}`}
       role='group'
       aria-label={`${label} group header`}
     >

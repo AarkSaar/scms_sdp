@@ -20,7 +20,6 @@ export default function MobileSidebar() {
 
     if (mobileOpen) {
       // focus the close button for accessibility
-      closeBtnRef.current?.focus();
       document.addEventListener('keydown', onKey);
       document.body.style.overflow = 'hidden';
     } else {
@@ -62,7 +61,7 @@ export default function MobileSidebar() {
             <img
               src='/icons/logo_name.svg'
               alt='Logo'
-              className='h-7 w-auto select-none'
+              className='h-8 w-auto select-none'
               draggable='false'
             />
           </div>
@@ -70,10 +69,10 @@ export default function MobileSidebar() {
           <button
             ref={closeBtnRef}
             onClick={() => setMobileOpen(false)}
-            className='flex items-center justify-center w-6 h-6 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20'
+            className='flex items-center text-[#8e8e8e] justify-center w-7 h-7 rounded-[8px] hover:bg-[#1a1a1a] focus:text-white focus:bg-[#1f1f1f]'
             aria-label='Close sidebar'
           >
-            <X className='w-3 h-3 text-white' />
+            <X className='w-3 h-3' />
           </button>
         </div>
 
@@ -122,7 +121,7 @@ export default function MobileSidebar() {
           <div className='w-full flex items-center justify-between p-1 rounded-[12px] bg-[#1a1a1a] border-[1.5px] border-[#1F1F1F]'>
             {/* avatar + details */}
             <div className='flex items-center gap-3'>
-              <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-bold text-black'>
+              <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-extrabold text-black'>
                 TS
               </div>
               <div className='flex flex-col gap-y-0.5'>

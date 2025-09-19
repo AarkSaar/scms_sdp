@@ -46,20 +46,20 @@ export default function IssueBoardCard({
 
   return (
     <article
-      className='w-[272px] flex flex-col overflow-hidden rounded-[16px]'
+      className='w-full flex flex-col overflow-hidden rounded-[12px]'
       role='article'
       aria-label={title || 'Issue card'}
     >
       {/* top image area (only if media present) */}
       {mediaUrl ? (
-        <div className='w-full h-[152px] bg-gray-800 overflow-hidden'>
+        <div className='w-full h-[136px] bg-gray-800 overflow-hidden'>
           <img src={mediaUrl} alt={`${title} media`} className='w-full h-full object-cover' />
         </div>
       ) : null}
 
       {/* bottom content */}
-      <div className='flex-1 bg-[#161616] px-4 py-3 flex flex-col justify-between'>
-        <div className='space-y-2'>
+      <div className='flex-1 bg-[#1a1a1a] px-4 py-3 flex flex-col justify-between'>
+        <div className='space-y-1'>
           {/* simplified badges row: priority, department, status */}
           <div className='flex flex-wrap items-center gap-2'>
             {priorityId ? <PriorityBadge id={priorityId} /> : null}
@@ -71,11 +71,11 @@ export default function IssueBoardCard({
           <h3 className='text-[12px] font-semibold text-white leading-5 line-clamp-2'>{title}</h3>
 
           {/* description */}
-          <p className='text-[10px] text-[#8e8e8e] line-clamp-3 font-semibold'>{description}</p>
+          <p className='text-[11px] text-[#8e8e8e] line-clamp-3 font-semibold'>{description}</p>
         </div>
 
         {/* divider */}
-        <div className='my-2 border-t border-white/5 ' />
+        <div className='my-2 border-t border-[#2a2a2a] ' />
 
         {/* bottom meta row: date on left, assignees on right */}
         <div className='flex items-center justify-between'>

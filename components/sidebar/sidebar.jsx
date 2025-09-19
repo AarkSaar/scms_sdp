@@ -75,7 +75,7 @@ export default function Sidebar() {
           <div className='w-full flex items-center justify-between p-1 rounded-[12px] bg-[#1a1a1a] border-[1.5px] border-[#1F1F1F]'>
             {/* avatar + text side by side */}
             <div className='flex items-center gap-3'>
-              <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-bold text-black'>
+              <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-extrabold text-black'>
                 TS
               </div>
               <div className='flex flex-col gap-y-0.5'>

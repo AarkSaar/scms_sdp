@@ -17,7 +17,7 @@ export default function DepartmentBadge({ id, badge, className = '' }) {
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] border-[1.5px] border-[#2f2f2f] font-semibold ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] border-[1px] border-[#2f2f2f] font-semibold ${className}`}
       style={{
         background: b.bgColor ?? '#2f2f2f',
         color: '#fff',
