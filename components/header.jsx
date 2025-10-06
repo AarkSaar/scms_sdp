@@ -1,4 +1,3 @@
-// components/Header.jsx
 'use client';
 
 import { useSidebar } from '../hooks/useSidebar';
@@ -16,7 +15,7 @@ const viewOptionItems = [
   { id: 'filter', label: 'Filter', dropdown: false, Icon: Filter },
 ];
 
-export default function Header() {
+export default function Header({ activeView = 'list', setActiveView = () => {} }) {
   const { setMobileOpen } = useSidebar();
 
   return (
@@ -24,14 +23,14 @@ export default function Header() {
     <header className='w-full flex-shrink-0 flex flex-col border-b gap-2 lg:gap-3 border-[#1f1f1f] px-6 pt-4 pb-4 bg-transparent'>
       {/* Top bar */}
       <div className='flex justify-between items-center'>
-        <div className='flex gap-x-2 items-center w-fit'>
+        <div className='flex gap-x-1 items-center w-fit'>
           <div
-            className='h-6 w-6 rounded-[4px] flex items-center justify-center lg:hidden text-[#8e8e8e] hover:bg-[#1f1f1f] focus:text-white cursor-pointer'
+            className='h-7 w-7 rounded-[8px] flex items-center justify-center lg:hidden text-[#8e8e8e] hover:bg-[#1f1f1f] focus:text-white cursor-pointer'
             onClick={() => setMobileOpen(true)}
             role='button'
             aria-label='Open mobile sidebar'
           >
-            <Equals strokeWidth={1.25} className={`w-4 md:w-5 h-auto`} />
+            <Equals strokeWidth={1.5} className={`w-4 md:w-5 h-auto`} />
           </div>
           <span className='text-white inline font-bold text-[16px] lg:text-[18px]'>All Issues</span>
         </div>
@@ -41,7 +40,7 @@ export default function Header() {
       {/* Bottom bar */}
       <div className='flex justify-between items-center'>
         <div>
-          <ViewTabs />
+          <ViewTabs active={activeView} onChange={setActiveView} />
         </div>
 
         <div className='flex gap-x-[8px] lg:gap-x-[12px]'>
