@@ -1,9 +1,18 @@
-// app/issues/create/page.jsx
-export default function IssuesCreatePage() {
+'use client';
+
+import React, { useState } from 'react';
+import Header from '@/components/Headers/CreateIssueHeader';
+import CreateIssueForm from '@/components/CreateIssueForm';
+import CreateIssueActions from '@/components/CreateISsueActions';
+
+export default function IssuesAllPage() {
+  const [activeView, setActiveView] = useState('list'); // 'list' | 'board'
+
   return (
-    <div className='p-6'>
-      <h1 className='text-xl font-semibold text-white'>Create Issue</h1>
-      <p className='text-sm text-[#9b9b9b] mt-2'>Form / editor goes here.</p>
+    <div className='flex flex-col w-full min-w-0 h-full min-h-0'>
+      <Header />
+      <CreateIssueForm />
+      <CreateIssueActions />
     </div>
   );
 }

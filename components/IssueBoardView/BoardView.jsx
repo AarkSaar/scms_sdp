@@ -56,6 +56,7 @@ export default function BoardView({ issues = issuesData, groupBy = 'status' }) {
   }, [issues, groupBy]);
 
   return (
+    // hide-scrollbar here
     <div className='h-full w-full overflow-x-auto overflow-y-hidden hide-scrollbar'>
       {/* flex container with full height to pass down to children */}
       <div className='inline-flex h-full min-w-max'>

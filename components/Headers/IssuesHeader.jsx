@@ -1,9 +1,9 @@
 'use client';
 
-import { useSidebar } from '../hooks/useSidebar';
-import SearchBar from './searchBar';
-import ViewTabs from './viewTabs';
-import ViewOptionItem from './viewOptionItem';
+import { useSidebar } from '../../hooks/useSidebar';
+import SearchBar from '../searchBar';
+import ViewTabs from '../viewTabs';
+import ViewOptionItem from '../viewOptionItem';
 import Columns from '@/assets/iconComponents/Columns';
 import Filter from '@/assets/iconComponents/Filter';
 import Equals from '@/assets/iconComponents/Equals';

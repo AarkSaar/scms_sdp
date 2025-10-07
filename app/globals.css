@@ -2,7 +2,6 @@
 @import 'tailwindcss';
 
 :root {
-  /* optional: expose variable name for other CSS usage (not required) */
   --font-plus-jakarta-sans: var(--font-plus-jakarta-sans);
 }
 
@@ -13,4 +12,37 @@
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+/* Custom Scrollbar */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #2f2f2f transparent; /* thumb | track */
+}
+
+/* Webkit - Chrome, Edge, Safari, Opera */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+}
+
+/* Hide scrollbar arrows */
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Scrollbar thumb (the pill) */
+::-webkit-scrollbar-thumb {
+  background-color: #2f2f2f;
+  border-radius: 9999px;
+  max-height: 32px;
+}
+
+/* Scrollbar track (container area) */
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0; /* 16px top & bottom margin → visible track = ~32px shorter */
 }

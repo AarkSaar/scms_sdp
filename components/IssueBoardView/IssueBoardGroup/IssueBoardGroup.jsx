@@ -37,7 +37,7 @@ export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy 
 
   return (
     <section
-      className='w-[280px] flex-shrink-0 flex flex-col h-full'
+      className='w-[288px] flex-shrink-0 flex flex-col h-full'
       aria-label={`${humanLabel} group`}
     >
       {/* header: fixed height, not scrollable */}
@@ -46,7 +46,8 @@ export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy 
       </div>
 
       {/* cards list: takes remaining height and scrolls vertically */}
-      <div className='flex-1 overflow-y-auto overflow-x-hidden p-1.5 min-h-0 hide-scrollbar'>
+      {/* hide-scrollbar here */}
+      <div className='flex-1 overflow-y-auto overflow-x-hidden p-1.5 min-h-0'>
         <div className='flex flex-col w-full justify-center gap-y-1.5'>
           {issues.map((issue) => (
             <IssueBoardCard

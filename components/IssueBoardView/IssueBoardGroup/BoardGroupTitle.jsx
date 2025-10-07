@@ -50,7 +50,7 @@ export default function BoardGroupTitle({
 
       {/* right: count pill */}
       <div
-        className='inline-flex items-center rounded-full px-2 py-0.75 bg-white'
+        className='inline-flex items-center rounded-full px-2 py-1 bg-white'
         aria-hidden={count == null}
       >
         <div className='text-[10px] font-semibold leading-[14px] text-[#0a0a0a] select-none'>

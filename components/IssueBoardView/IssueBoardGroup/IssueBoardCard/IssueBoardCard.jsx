@@ -46,7 +46,7 @@ export default function IssueBoardCard({
 
   return (
     <article
-      className='w-full flex flex-col overflow-hidden rounded-[12px]'
+      className='w-full flex flex-col overflow-hidden rounded-[16px]'
       role='article'
       aria-label={title || 'Issue card'}
     >
@@ -58,7 +58,7 @@ export default function IssueBoardCard({
       ) : null}
 
       {/* bottom content */}
-      <div className='flex-1 bg-[#1a1a1a] px-4 py-3 flex flex-col justify-between'>
+      <div className='flex-1 bg-[#1a1a1a] px-3 py-3 flex flex-col justify-between'>
         <div className='space-y-1'>
           {/* simplified badges row: priority, department, status */}
           <div className='flex flex-wrap items-center gap-2'>

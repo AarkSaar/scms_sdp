@@ -36,7 +36,7 @@ export default function SingleRow({ issue }) {
       </div>
 
       {/* Title / Description */}
-      <div className='px-4 flex-1 w-full h-full'>
+      <div className='px-4 flex-1  w-[400px] lg:w-full h-full'>
         <div className='text-[13px] font-semibold text-white line-clamp-1'>
           {issue.title || 'Untitled Issue'}
         </div>

@@ -53,7 +53,8 @@ export default function ListView({ issues = issuesData, groupBy = 'status' }) {
 
   return (
     // vertical stack of groups, page scrolls vertically
-    <div className='flex flex-col gap-4 w-full h-full overflow-y-auto min-h-0 hide-scrollbar'>
+    // hide-scrollbar here
+    <div className='flex flex-col gap-4 w-full h-full overflow-y-auto min-h-0'>
       {groups.map((g) => (
         <div key={g.key} className='w-full'>
           <ListGroup groupKey={g.key} title={g.key} issues={g.items} groupBy={groupBy} />

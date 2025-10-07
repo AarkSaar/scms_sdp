@@ -1,5 +1,5 @@
 // app/issues/mine/page.jsx
-import Header from '@/components/header';
+import Header from '@/components/Headers/IssuesHeader';
 
 export default function IssuesMinePage() {
   return (
