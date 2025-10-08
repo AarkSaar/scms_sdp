@@ -43,15 +43,41 @@ export default function CreateIssueActions({ onSubmit, onAttach }) {
       </button>
 
       {/* Right: anonymous + Submit */}
-      <div className='flex flex-row items-center gap-4 lg:gap-3'>
-        <label className='flex items-center gap-2 px-3 py-2 hover:bg-[#1a1a1a] rounded-[8px] select-none'>
-          <input
-            type='checkbox'
-            checked={anonymous}
-            onChange={(e) => setAnonymous(e.target.checked)}
-            className='h-3 w-3 accent-[#F188F0]'
-            aria-label='Post anonymously'
-          />
+      <div className='flex flex-row items-center gap-1 lg:gap-3'>
+        <label className='flex items-center gap-2 px-3 py-2 hover:bg-[#1a1a1a] rounded-[8px] select-none cursor-pointer'>
+          {/* checkbox + absolute checkmark */}
+          <div className='relative flex items-center'>
+            <input
+              type='checkbox'
+              checked={anonymous}
+              onChange={(e) => setAnonymous(e.target.checked)}
+              className='peer h-3.5 w-3.5 cursor-pointer transition-all appearance-none rounded-sm
+                 bg-[#1a1a1a] border border-[#2f2f2f]
+                 checked:bg-[#F188F0] checked:border-transparent'
+              aria-label='Post anonymously'
+            />
+
+            {/* SVG check — centered inside the checkbox, visible only when checked */}
+            <span
+              className='absolute inset-0 flex items-center justify-center pointer-events-none
+                     opacity-0 peer-checked:opacity-100 transition-opacity duration-150'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='h-3 w-3'
+                viewBox='0 0 20 20'
+                fill='none'
+                stroke='none'
+              >
+                <path
+                  d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'
+                  fill='#000'
+                />
+              </svg>
+            </span>
+          </div>
+
+          {/* label text */}
           <span className='text-[12px] font-semibold text-white'>Anonymous?</span>
         </label>
 

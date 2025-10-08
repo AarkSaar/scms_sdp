@@ -13,7 +13,7 @@ export default function CreateIssueForm() {
       />
 
       {/* Divider */}
-      <div className='w-full border-b border-[#1a1a1a]'></div>
+      <div className='w-full border-b-[1.5px] border-[#1a1a1a]'></div>
 
       {/* Description textarea */}
       <textarea
