@@ -1,7 +1,7 @@
 // app/layout.jsx  (root layout — server component)
 import './globals.css';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import { AuthProvider } from '@/modules/auth/AuthProvider';
+import AuthProvider from '@/modules/auth/AuthProvider';
 import { ToastProvider } from '@/components/Shared/ToastProvider';
 
 const plusJakarta = Plus_Jakarta_Sans({

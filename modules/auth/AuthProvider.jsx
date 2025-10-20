@@ -1,31 +1,64 @@
-// module/auth/AuthProvider.js
+// modules/auth/AuthProvider.jsx
 'use client';
 
-import { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 
 const AuthContext = createContext(null);
 
-const AuthProvider = ({ children }) => {
-  const client = getSupabaseClient();
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.auth.getSession().then(({ data }) => {
-      setUser(data?.session?.user || null);
+    const client = getSupabaseClient();
+    if (!client) {
+      // client missing (likely env vars not set). Don't crash — keep loading=false so UI can render an error UI if desired.
+      setUser(null);
       setLoading(false);
-    });
+      console.warn('Supabase client unavailable in AuthProvider (check NEXT_PUBLIC env vars).');
+      return;
+    }
 
-    const { data: listener } = client.auth.onAuthStateChange((e, session) => {
-      setUser(session?.user || null);
+    let mounted = true;
+    // get initial session
+    client.auth
+      .getSession()
+      .then((res) => {
+        if (!mounted) return;
+        const data = res?.data ?? res; // sdk versions differ; be tolerant
+        const session = data?.session ?? null;
+        const userFromSession = data?.user ?? session?.user ?? null;
+        setUser(userFromSession);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('getSession error', err);
+        setLoading(false);
+      });
+
+    // subscribe to changes
+    const { data: listener } = client.auth.onAuthStateChange((_event, session) => {
+      const u = session?.user ?? null;
+      setUser(u);
     });
 
     return () => {
-      listener.subscription.unsubscribe();
+      mounted = false;
+      // listener might be undefined if SDK changed shape — guard it
+      try {
+        if (listener?.subscription?.unsubscribe) {
+          listener.subscription.unsubscribe();
+        } else if (listener?.unsubscribe) {
+          listener.unsubscribe();
+        }
+      } catch (e) {
+        // ignore cleanup errors
+      }
     };
   }, []);
-  return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
-};
 
-export { AuthContext, AuthProvider };
+  return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
+}
+
+export { AuthContext };
