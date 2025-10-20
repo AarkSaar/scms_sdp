@@ -1,6 +1,6 @@
 // app/api/auth/signup/route.js
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/modules/shared/supabaseAdmin';
+import supabaseAdmin from '@/modules/shared/supabaseAdmin';
 import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
 
 /**
