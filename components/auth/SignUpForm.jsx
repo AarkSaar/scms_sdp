@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import client from '@/modules/shared/supabaseClient';
 import LockIcon from '@/assets/iconComponents/LockFill';
+import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/Shared/ToastProvider';
 import MailFill from '@/assets/iconComponents/MailFIll';
@@ -16,6 +17,7 @@ export default function SignUp() {
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [showEye, setShowEye] = useState(false);
+  const client = getSupabaseClient();
 
   async function handleSignUp(e) {
     e.preventDefault();

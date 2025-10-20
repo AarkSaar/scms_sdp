@@ -1,6 +1,6 @@
 // app/api/auth/signup/route.js
 import { NextResponse } from 'next/server';
-import supabaseAdmin from '@/modules/shared/supabaseAdmin';
+import { getSupabaseAdmin } from '@/modules/shared/supabaseAdmin';
 import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
 
 /**
@@ -14,6 +14,7 @@ import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesSe
  * If you prefer email confirmation flows, use the client-side signUp or set email_confirm to false/true accordingly.
  */
 export async function POST(request) {
+  const supabaseAdmin = getSupabaseAdmin();
   try {
     const body = await request.json();
     const email = (body.email || '').toString().trim();

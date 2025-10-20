@@ -1,6 +1,6 @@
 // modules/profiles/services/profilesService.js
 
-import supabaseAdmin from '@/modules/shared/supabaseAdmin';
+import { getSupabaseAdmin } from '@/modules/shared/supabaseAdmin';
 
 /**
  * Upsert a profile row for a Supabase auth user.
@@ -8,10 +8,10 @@ import supabaseAdmin from '@/modules/shared/supabaseAdmin';
  * - Runs with the service role key (supabaseAdmin) so it bypasses RLS and is safe.
  */
 export async function ensureProfileForAuthUser(user, extra = {}) {
+  const supabaseAdmin = getSupabaseAdmin();
   if (!user || !user.id) {
     throw new Error('ensureProfileForAuthUser: missing user.id');
   }
-
   const id = user.id; // uuid string from auth.users
   const email = user.email ?? (user.user_metadata && user.user_metadata.email) ?? null;
   const name =

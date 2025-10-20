@@ -1,6 +1,6 @@
 // app/api/auth/signin/route.js
 import { NextResponse } from 'next/server';
-import supabaseClient from '@/modules/shared/supabaseClient';
+import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
 
 /**
@@ -13,6 +13,7 @@ import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesSe
  *  but this centralizes the call and allows server-side post-processing like ensuring profiles.)
  */
 export async function POST(request) {
+  const supabaseClient = getSupabaseClient();
   try {
     const body = await request.json();
     const email = (body.email || '').toString().trim();

@@ -1,7 +1,7 @@
 // components/auth/signInForm.jsx
 'use client';
 import React, { useState } from 'react';
-import client from '@/modules/shared/supabaseClient';
+import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/Shared/ToastProvider';
 import MailFill from '@/assets/iconComponents/MailFIll';
@@ -11,6 +11,7 @@ import EyeIcon from '@/assets/iconComponents/Eye';
 import EyeOffIcon from '@/assets/iconComponents/EyeOff';
 
 export default function SignIn() {
+  const client = getSupabaseClient();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();

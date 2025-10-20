@@ -1,5 +1,5 @@
 // modules/profiles/adapters/profilesAdapter.server.js
-import supabaseAdmin from '@/modules/shared/supabaseAdmin';
+import { getSupabaseAdmin } from '@/modules/shared/supabaseAdmin';
 
 /**
  * Insert or update a profile row keyed by auth.users.id (uuid).
@@ -8,6 +8,7 @@ import supabaseAdmin from '@/modules/shared/supabaseAdmin';
  * profile: { id: uuid, email?: string, name?: string, role_id?: string, avatar_url?: string }
  */
 export async function upsertProfile(profile) {
+  const supabaseAdmin = getSupabaseAdmin();
   const row = {
     id: profile.id,
     email: profile.email ?? null,
