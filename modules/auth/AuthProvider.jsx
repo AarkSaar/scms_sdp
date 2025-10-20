@@ -2,11 +2,12 @@
 'use client';
 
 import { createContext, useState, useEffect } from 'react';
-import client from '@/modules/shared/supabaseClient';
+import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
+  const client = getSupabaseClient();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
