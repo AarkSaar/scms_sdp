@@ -1,19 +1,8 @@
-// app/api/auth/signin/route.js
 import { NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
 
-/**
- * POST /api/auth/signin
- * body: { email, password }
- * Returns the session data from Supabase if successful.
- *
- * This route uses the anon key client to perform sign-in and returns the session object.
- * (You could also let client-side code call supabaseClient.auth.signInWithPassword directly,
- *  but this centralizes the call and allows server-side post-processing like ensuring profiles.)
- */
 export async function POST(request) {
-  const supabaseClient = getSupabaseClient();
   try {
     const body = await request.json();
     const email = (body.email || '').toString().trim();
@@ -22,6 +11,8 @@ export async function POST(request) {
     if (!email || !password) {
       return NextResponse.json({ error: 'email and password required' }, { status: 400 });
     }
+
+    const supabaseClient = await getSupabaseClient();
 
     const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
@@ -36,7 +27,6 @@ export async function POST(request) {
     const session = data?.session ?? null;
     const user = data?.user ?? session?.user ?? null;
 
-    // Ensure the profile exists (upsert). pass-through errors non-fatal.
     if (user?.id) {
       try {
         await ensureProfileForAuthUser(user);
