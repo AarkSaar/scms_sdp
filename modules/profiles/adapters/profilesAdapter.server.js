@@ -1,5 +1,5 @@
 // modules/profiles/adapters/profilesAdapter.server.js
-import { supabaseAdmin } from '@/modules/shared/supabaseAdmin';
+import supabaseAdmin from '@/modules/shared/supabaseAdmin';
 
 /**
  * Insert or update a profile row keyed by auth.users.id (uuid).

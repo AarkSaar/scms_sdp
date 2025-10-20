@@ -1,6 +1,6 @@
 // modules/profiles/services/profilesService.js
 
-import { supabaseAdmin } from '@/modules/shared/supabaseAdmin';
+import supabaseAdmin from '@/modules/shared/supabaseAdmin';
 
 /**
  * Upsert a profile row for a Supabase auth user.
