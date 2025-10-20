@@ -1,10 +1,8 @@
-// app/layout.js
+// app/layout.jsx  (root layout — server component)
 import './globals.css';
-import { SidebarProvider } from '../hooks/useSidebar';
-import Sidebar from '@/components/sidebar/sidebar';
-import MobileSidebar from '@/components/sidebar/sidebarMobile';
-
 import { Plus_Jakarta_Sans } from 'next/font/google';
+import { AuthProvider } from '@/modules/auth/AuthProvider';
+import { ToastProvider } from '@/components/Shared/ToastProvider';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -16,28 +14,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 export default function RootLayout({ children }) {
   return (
     <html lang='en' className={`${plusJakarta.className} ${plusJakarta.variable} antialiased`}>
-      {/* Use full screen/viewport sizing here */}
-      <body className='h-screen max-h-[100dvh] max-w-screen'>
-        <SidebarProvider>
-          {/* root container fills the screen */}
-          <div className='h-full max-w-full flex gap-x-2 bg-[#0a0a0a] lg:p-2'>
-            {/* Desktop sidebar wrapper (hidden below lg). make it full height */}
-            <div className='hidden lg:flex h-full'>
-              <Sidebar />
-            </div>
-
-            {/* Content column: allow it to grow and shrink; internal scrolling will happen in main */}
-            <div className='flex-1 min-h-0 min-w-0 flex flex-col w-full'>
-              {/* main is the scroll host for the page; ensure it doesn't expand parent */}
-              <main className='flex-1 min-h-0 h-full min-w-0 w-full overflow-hidden rounded-[4px] bg-[#101010] border border-[#161616]'>
-                {children}
-              </main>
-            </div>
-          </div>
-
-          {/* Mobile sidebar overlay */}
-          <MobileSidebar />
-        </SidebarProvider>
+      <body className='h-screen max-h-[100dvh] max-w-screen bg-[#0a0a0a]'>
+        <AuthProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "^14.2.15",
+    "@supabase/supabase-js": "^2.75.1",
     "next": "15.5.2",
     "node-fetch": "^3.3.2",
     "react": "19.1.0",

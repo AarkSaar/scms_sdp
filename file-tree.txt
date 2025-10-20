@@ -1,0 +1,211 @@
+scms_sdp/
+├── .vscode/
+│   └── settings.json
+├── app/
+│   ├── (main)/
+│   │   ├── issues/
+│   │   │   ├── [issue_id]/
+│   │   │   │   └── page.jsx
+│   │   │   ├── all/
+│   │   │   │   └── page.jsx
+│   │   │   ├── create/
+│   │   │   │   └── page.jsx
+│   │   │   └── mine/
+│   │   │       └── page.jsx
+│   │   ├── updates/
+│   │   │   ├── announcements/
+│   │   │   │   └── page.jsx
+│   │   │   └── notifications/
+│   │   │       └── page.jsx
+│   │   └── layout.js
+│   ├── auth/
+│   │   └── page.jsx
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+├── assets/
+│   ├── iconComponents/
+│   │   ├── Add.jsx
+│   │   ├── AddOutline.jsx
+│   │   ├── Announcement.jsx
+│   │   ├── Assigned.jsx
+│   │   ├── Ball.jsx
+│   │   ├── Bell.jsx
+│   │   ├── BoardView.jsx
+│   │   ├── Bus.jsx
+│   │   ├── Calendar.jsx
+│   │   ├── Cancelled.jsx
+│   │   ├── CaretDown.jsx
+│   │   ├── Clip.jsx
+│   │   ├── Columns.jsx
+│   │   ├── DropAdd.jsx
+│   │   ├── Engineer.jsx
+│   │   ├── Equals.jsx
+│   │   ├── Exclamation.jsx
+│   │   ├── Expand.jsx
+│   │   ├── Eye.jsx
+│   │   ├── EyeOff.jsx
+│   │   ├── Filter.jsx
+│   │   ├── Filter2.jsx
+│   │   ├── Flag.jsx
+│   │   ├── GlobeExclamation.jsx
+│   │   ├── GoogleIcon.jsx
+│   │   ├── GraduationCap.jsx
+│   │   ├── InProgress.jsx
+│   │   ├── ListView.jsx
+│   │   ├── LockFill.jsx
+│   │   ├── Logo.jsx
+│   │   ├── LogoName.jsx
+│   │   ├── MailFIll.jsx
+│   │   ├── More.jsx
+│   │   ├── Naira.jsx
+│   │   ├── NeedsReview.jsx
+│   │   ├── OpenLockFill.jsx
+│   │   ├── OpenPanel.jsx
+│   │   ├── Pending.jsx
+│   │   ├── People.jsx
+│   │   ├── Resolved.jsx
+│   │   ├── Search.jsx
+│   │   ├── Send.jsx
+│   │   ├── SpecialEvent.jsx
+│   │   ├── UpDownArrow.jsx
+│   │   └── X.jsx
+│   ├── images/
+│   │   └── image.png
+│   └── svg/
+│       ├── _Instagram.svg
+│       ├── facebook.svg
+│       └── twitter.svg
+├── components/
+│   ├── auth/
+│   │   ├── BrandingSection.jsx
+│   │   ├── SignInForm.jsx
+│   │   ├── SignUpForm.jsx
+│   │   └── Tabs.jsx
+│   ├── CreateIssue/
+│   │   ├── CreateIssueActions.jsx
+│   │   ├── CreateIssueAttachments.jsx
+│   │   └── CreateIssueForm.jsx
+│   ├── Headers/
+│   │   ├── CreateIssueHeader.jsx
+│   │   └── IssuesHeader.jsx
+│   ├── IssueBoardView/
+│   │   ├── IssueBoardGroup/
+│   │   │   ├── IssueBoardCard/
+│   │   │   │   ├── IssueBoardCard.jsx
+│   │   │   │   └── ProfileStack.jsx
+│   │   │   ├── BoardGroupTitle.jsx
+│   │   │   └── IssueBoardGroup.jsx
+│   │   └── BoardView.jsx
+│   ├── IssueListView/
+│   │   ├── IssueListGroup/
+│   │   │   ├── ListGroup.jsx
+│   │   │   ├── ListGroupTitle.jsx
+│   │   │   ├── ProfileStack.jsx
+│   │   │   └── SingleRow.jsx
+│   │   └── ListView.jsx
+│   ├── Shared/
+│   │   ├── Badges/
+│   │   │   ├── DepartmentBadge.jsx
+│   │   │   ├── PriorityBadge.jsx
+│   │   │   └── StatusBadge.jsx
+│   │   └── ToastProvider.jsx
+│   ├── sidebar/
+│   │   ├── createIssueButton.jsx
+│   │   ├── sidebar.jsx
+│   │   ├── sidebarItem.jsx
+│   │   ├── sidebarLogo.jsx
+│   │   └── sidebarMobile.jsx
+│   ├── searchBar.jsx
+│   ├── viewOptionItem.jsx
+│   └── viewTabs.jsx
+├── FigmaJSON/
+├── hooks/
+│   ├── useAuth.js
+│   └── useSidebar.js
+├── lib/
+│   ├── badges.js
+│   ├── cuid.js
+│   ├── issues.json
+│   ├── navItems.js
+│   └── viewOptionItems.js
+├── modules/
+│   ├── api/
+│   │   └── client.js
+│   └── auth/
+│       └── AuthProvider.jsx
+├── public/
+│   ├── fonts/
+│   │   ├── PlusJakartaSans-VariableFont_wght.ttf
+│   │   └── Poppins-VariableFont_wght.otf
+│   ├── icons/
+│   │   ├── Add.svg
+│   │   ├── AddOutline.svg
+│   │   ├── Announcement.svg
+│   │   ├── Assigned.svg
+│   │   ├── Ball.svg
+│   │   ├── Bell.svg
+│   │   ├── BoardView.svg
+│   │   ├── Bus.svg
+│   │   ├── Calendar.svg
+│   │   ├── Cancelled.svg
+│   │   ├── caret-down.svg
+│   │   ├── Clip.svg
+│   │   ├── Columns.svg
+│   │   ├── DropAdd.svg
+│   │   ├── Engineer.svg
+│   │   ├── Equals.svg
+│   │   ├── Exclamation.svg
+│   │   ├── Expand.svg
+│   │   ├── Filter.svg
+│   │   ├── Filter2.svg
+│   │   ├── Flag.svg
+│   │   ├── globe_exclamation.svg
+│   │   ├── Google.svg
+│   │   ├── GraduationCap.svg
+│   │   ├── InProgress.svg
+│   │   ├── Layer_2_copy_2_xA0_Image_3_.png
+│   │   ├── ListView.svg
+│   │   ├── lock-fill.svg
+│   │   ├── logo_name.svg
+│   │   ├── Logo.svg
+│   │   ├── More.svg
+│   │   ├── Naira.svg
+│   │   ├── needs_review.svg
+│   │   ├── NeedsReview.svg
+│   │   ├── open-lock-fill.svg
+│   │   ├── OpenPanel.svg
+│   │   ├── Pending.svg
+│   │   ├── People.svg
+│   │   ├── Resolved.svg
+│   │   ├── search.svg
+│   │   ├── send.svg
+│   │   ├── SpecialEvent.svg
+│   │   ├── upDownArrow.svg
+│   │   └── x.svg
+│   ├── images/
+│   │   ├── bus.png
+│   │   ├── library.jpeg
+│   │   └── man.png
+│   ├── dotted-background.svg
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── scripts/
+│   ├── file-tree.js
+│   ├── FNodeJson.js
+│   └── svg-to-components.js
+├── .env
+├── .env.example
+├── .gitignore
+├── .prettierrc
+├── eslint.config.mjs
+├── file-tree.txt
+├── jsconfig.json
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+├── README.md
+└── tailwind.config.js
