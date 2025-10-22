@@ -18,6 +18,12 @@ scms_sdp/
 │   │   │   └── notifications/
 │   │   │       └── page.jsx
 │   │   └── layout.js
+│   ├── api/
+│   │   └── auth/
+│   │       ├── signin/
+│   │       │   └── route.js
+│   │       └── signup/
+│   │           └── route.js
 │   ├── auth/
 │   │   └── page.jsx
 │   ├── globals.css
@@ -69,6 +75,7 @@ scms_sdp/
 │   │   ├── Send.jsx
 │   │   ├── SpecialEvent.jsx
 │   │   ├── UpDownArrow.jsx
+│   │   ├── UserIcon.jsx
 │   │   └── X.jsx
 │   ├── images/
 │   │   └── image.png
@@ -131,9 +138,16 @@ scms_sdp/
 │   └── viewOptionItems.js
 ├── modules/
 │   ├── api/
-│   │   └── client.js
-│   └── auth/
-│       └── AuthProvider.jsx
+│   ├── auth/
+│   │   └── AuthProvider.jsx
+│   ├── profiles/
+│   │   ├── adapters/
+│   │   │   └── profilesAdapter.server.js
+│   │   └── services/
+│   │       └── profilesService.js
+│   └── shared/
+│       ├── supabaseAdmin.js
+│       └── supabaseClient.js
 ├── public/
 │   ├── fonts/
 │   │   ├── PlusJakartaSans-VariableFont_wght.ttf

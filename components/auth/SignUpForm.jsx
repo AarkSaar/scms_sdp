@@ -1,7 +1,6 @@
 // components/auth/signUpForm.jsx
 'use client';
 import React, { useState } from 'react';
-import client from '@/modules/shared/supabaseClient';
 import LockIcon from '@/assets/iconComponents/LockFill';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { useRouter } from 'next/navigation';
@@ -10,6 +9,7 @@ import MailFill from '@/assets/iconComponents/MailFIll';
 import GoogleLogo from '@/assets/iconComponents/GoogleIcon';
 import EyeIcon from '@/assets/iconComponents/Eye';
 import EyeOffIcon from '@/assets/iconComponents/EyeOff';
+import UserIcon from '@/assets/iconComponents/UserIcon';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +23,7 @@ export default function SignUp() {
     e.preventDefault();
     setLoading(true);
     const form = new FormData(e.currentTarget);
+    const name = (form.get('name') || '').toString().trim();
     const email = (form.get('email') || '').toString().trim();
     const password = (form.get('password') || '').toString();
 
@@ -32,26 +33,47 @@ export default function SignUp() {
       return;
     }
 
+    // username derivation logic
+    const local = email.split('@')[0] || '';
+    const usernameBase = local
+      .toLowerCase()
+      .replace(/[^a-z0-9-_\.]/g, '')
+      .replace(/\.+/g, '.')
+      .replace(/^\.+|\.+$/g, '')
+      .slice(0, 40);
+    const username = usernameBase || `user${Date.now()}`;
+
     try {
-      // Use client-side signUp so browser supabase client stores session if returned
-      const { data, error } = await client.auth.signUp({
-        email,
-        password,
+      const resp = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, username }),
       });
 
-      if (error) {
-        toast({ type: 'error', message: error.message || 'Sign up failed' });
+      // be defensive: if server returned HTML (error page), read as text and show
+      const contentType = resp.headers.get('content-type') || '';
+      let payload;
+      if (contentType.includes('application/json')) {
+        payload = await resp.json();
+      } else {
+        payload = { error: await resp.text() };
+      }
+
+      if (!resp.ok) {
+        const errMsg = payload?.error || 'Sign up failed';
+        toast({
+          type: 'error',
+          message: typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg),
+        });
         setLoading(false);
         return;
       }
 
-      // If signUp requires email confirmation, data.user may be present but session may be null.
-      // You can route to a "check email" page or just sign them in if session was returned.
       toast({ type: 'success', message: 'Sign up successful' });
-      router.push('/issues/all');
+      router.push('/app/issues/all');
     } catch (err) {
+      console.error('Sign up unexpected error', err);
       toast({ type: 'error', message: 'Something went wrong. Please try again.' });
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -60,7 +82,16 @@ export default function SignUp() {
   return (
     <form onSubmit={handleSignUp} className='flex flex-col gap-5 w-full max-w-lg'>
       <div className='space-y-3  text-[14px] font-medium'>
-        <div className='w-full items-center bg-[#161616] flex flex-row gap-x-2.5  border border-[#1f1f1f] px-3.5 h-9.5 rounded-[12px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
+        <div className='w-full items-center bg-[#161616] flex flex-row gap-x-2.5  border border-[#1f1f1f] px-3.5 h-9.5 rounded-[10px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
+          <UserIcon width={14} strokeWidth={2} fillColor='#787878' />
+          <input
+            name='name'
+            type='text'
+            placeholder='Display Name'
+            className=' outline-none w-full focus-none text-white placeholder:text-[#8e8e8e] placeholder:font-medium placeholder:text-[14px]'
+          />
+        </div>
+        <div className='w-full items-center bg-[#161616] flex flex-row gap-x-2.5  border border-[#1f1f1f] px-3.5 h-9.5 rounded-[10px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
           <MailFill width={14} fillColor='#787878' />
           <input
             name='email'
@@ -69,7 +100,7 @@ export default function SignUp() {
             className=' outline-none w-full focus-none text-white placeholder:text-[#8e8e8e] placeholder:font-medium placeholder:text-[14px]'
           />
         </div>
-        <div className='w-full items-center cursor-text bg-[#161616] flex flex-row justify-between border border-[#1f1f1f] pl-3.5 pr-1 h-9.5 rounded-[12px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
+        <div className='w-full items-center cursor-text bg-[#161616] flex flex-row justify-between border border-[#1f1f1f] pl-3.5 pr-1 h-9.5 rounded-[10px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
           <div className='flex flex-row gap-x-2.5 items-center justify-start w-full'>
             <LockIcon width={14} fillColor='#787878' />
             <input

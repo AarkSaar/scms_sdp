@@ -11,7 +11,7 @@ import EyeIcon from '@/assets/iconComponents/Eye';
 import EyeOffIcon from '@/assets/iconComponents/EyeOff';
 
 export default function SignIn() {
-  const client = getSupabaseClient();
+  const supabase = getSupabaseClient();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -20,6 +20,11 @@ export default function SignIn() {
 
   async function handleSignIn(e) {
     e.preventDefault();
+    if (!supabase) {
+      toast({ type: 'error', message: 'Supabase not configured. Check NEXT_PUBLIC env vars.' });
+      return;
+    }
+
     setLoading(true);
     const form = new FormData(e.currentTarget);
     const email = (form.get('email') || '').toString().trim();
@@ -32,23 +37,36 @@ export default function SignIn() {
     }
 
     try {
-      // Uses supabase-js v2 API (client is the shared one)
-      const { data, error } = await client.auth.signInWithPassword({
+      // Use the browser/anon client directly to sign in
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
+        console.error('signInWithPassword error', error);
         toast({ type: 'error', message: error.message || 'Sign in failed' });
         setLoading(false);
         return;
       }
 
-      // At this point client.auth has stored the session locally (supabase-js handles it).
+      const session = data?.session ?? null;
+      const user = data?.user ?? session?.user ?? null;
+
+      // set session in browser client (supabase-js v2)
+      if (session && session.access_token && session.refresh_token) {
+        await supabase.auth.setSession({
+          access_token: session.access_token,
+          refresh_token: session.refresh_token,
+        });
+      }
+
       toast({ type: 'success', message: 'Signed in' });
-      router.push('/issues/all');
+
+      // Navigate to your app
+      router.push('/app/issues/all');
     } catch (err) {
-      console.error(err);
+      console.error('Sign in unexpected error', err);
       toast({ type: 'error', message: 'Something went wrong, please try again.' });
     } finally {
       setLoading(false);
@@ -58,7 +76,7 @@ export default function SignIn() {
   return (
     <form onSubmit={handleSignIn} className='flex flex-col gap-5 w-full max-w-lg'>
       <div className='space-y-3 text-[14px] font-medium'>
-        <div className='w-full items-center bg-[#161616] flex flex-row gap-x-2.5 border border-[#1f1f1f] px-3.5 h-9.5 rounded-[12px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
+        <div className='w-full items-center bg-[#161616] flex flex-row gap-x-2.5 border border-[#1f1f1f] px-3.5 h-9.5 rounded-[10px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
           <MailFill width={14} fillColor='#787878' />
           <input
             name='email'
@@ -67,7 +85,7 @@ export default function SignIn() {
             className=' outline-none w-full focus-none text-white placeholder:text-[#8e8e8e] placeholder:font-medium  placeholder:text-[14px]'
           />
         </div>
-        <div className='w-full items-center cursor-text bg-[#161616] flex flex-row justify-between border border-[#1f1f1f] pl-3.5 pr-1 h-9.5 rounded-[12px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
+        <div className='w-full items-center cursor-text bg-[#161616] flex flex-row justify-between border border-[#1f1f1f] pl-3.5 pr-1 h-9.5 rounded-[10px] hover:border-[#2f2f2f] focus:border-[#FC83F0]/50'>
           <div className='flex flex-row gap-x-2.5 items-center justify-start w-full'>
             <LockIcon width={14} fillColor='#787878' />
             <input

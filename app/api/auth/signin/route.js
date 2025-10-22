@@ -1,3 +1,4 @@
+// app/api/signin/route.js
 import { NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
@@ -12,8 +13,15 @@ export async function POST(request) {
       return NextResponse.json({ error: 'email and password required' }, { status: 400 });
     }
 
-    const supabaseClient = await getSupabaseClient();
+    const supabaseClient = getSupabaseClient();
+    if (!supabaseClient) {
+      return NextResponse.json(
+        { error: 'Supabase client not configured (missing NEXT_PUBLIC_* env vars)' },
+        { status: 500 },
+      );
+    }
 
+    // Use the anon client on the server to sign in the user and get the session object
     const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
@@ -27,6 +35,7 @@ export async function POST(request) {
     const session = data?.session ?? null;
     const user = data?.user ?? session?.user ?? null;
 
+    // Ensure profile exists (non-fatal if it fails)
     if (user?.id) {
       try {
         await ensureProfileForAuthUser(user);
@@ -35,6 +44,7 @@ export async function POST(request) {
       }
     }
 
+    // Return the session and user to the client. Client will call supabase.auth.setSession(...)
     return NextResponse.json({ data: { session, user } }, { status: 200 });
   } catch (err) {
     console.error(err);
