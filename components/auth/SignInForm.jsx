@@ -5,27 +5,31 @@ import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/Shared/ToastProvider';
 import MailFill from '@/assets/iconComponents/MailFIll';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 import GoogleLogo from '@/assets/iconComponents/GoogleIcon';
 import LockIcon from '@/assets/iconComponents/LockFill';
 import EyeIcon from '@/assets/iconComponents/Eye';
 import EyeOffIcon from '@/assets/iconComponents/EyeOff';
 
 export default function SignIn() {
-  const supabase = getSupabaseClient();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const { refresh: refreshProfile, profile, loading: profileLoading } = useProfile();
   const [showPassword, setShowPassword] = useState(false);
   const [showEye, setShowEye] = useState(false);
 
   async function handleSignIn(e) {
     e.preventDefault();
+    setLoading(true);
+
+    const supabase = getSupabaseClient();
     if (!supabase) {
-      toast({ type: 'error', message: 'Supabase not configured. Check NEXT_PUBLIC env vars.' });
+      toast({ type: 'error', message: 'Supabase not configured (check NEXT_PUBLIC envs).' });
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
     const form = new FormData(e.currentTarget);
     const email = (form.get('email') || '').toString().trim();
     const password = (form.get('password') || '').toString();
@@ -37,11 +41,7 @@ export default function SignIn() {
     }
 
     try {
-      // Use the browser/anon client directly to sign in
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
         console.error('signInWithPassword error', error);
@@ -51,9 +51,6 @@ export default function SignIn() {
       }
 
       const session = data?.session ?? null;
-      const user = data?.user ?? session?.user ?? null;
-
-      // set session in browser client (supabase-js v2)
       if (session && session.access_token && session.refresh_token) {
         await supabase.auth.setSession({
           access_token: session.access_token,
@@ -61,10 +58,11 @@ export default function SignIn() {
         });
       }
 
+      // small delay so RoleProvider sees the change
+      await new Promise((r) => setTimeout(r, 500));
+      await refreshProfile();
       toast({ type: 'success', message: 'Signed in' });
-
-      // Navigate to your app
-      router.push('/app/issues/all');
+      router.push('/issues/all');
     } catch (err) {
       console.error('Sign in unexpected error', err);
       toast({ type: 'error', message: 'Something went wrong, please try again.' });

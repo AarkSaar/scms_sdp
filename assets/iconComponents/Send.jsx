@@ -1,25 +1,19 @@
-import React from "react";
+import React from 'react';
 
 /**
- * Send — auto-generated from SVG
- * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ * SendIcon — auto-generated from SVG
  */
-export default function Send({
+export default function SendIcon({
   width,
   height,
-  strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeWidth = 1.26316,
+  strokeColor = 'currentColor',
+  fillColor = 'none',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 14 13
+  // viewBox: 0 0 14 13 -> aspectRatio = 14/13
   const aspectRatio = 14 / 13;
-
   let computedWidth = 14;
   let computedHeight = 13;
 
@@ -38,13 +32,21 @@ export default function Send({
     <svg
       width={computedWidth}
       height={computedHeight}
-      viewBox="0 0 14 13"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox='0 0 14 13'
+      xmlns='http://www.w3.org/2000/svg'
       className={className}
-      role="img"
-      aria-hidden={className ? "false" : "true"}
+      role='img'
+      aria-hidden={className ? 'false' : 'true'}
+      {...props}
     >
-      <path d="M3.2065 6.68421L1.31177 1L13.3118 6.68421M3.2065 6.68421L1.31177 12.3684L13.3118 6.68421M3.2065 6.68421H13.3118" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
+      <path
+        d='M2.52633 6.3158L0.631592 0.631592L12.6316 6.3158M2.52633 6.3158L0.631592 12L12.6316 6.3158M2.52633 6.3158H12.6316'
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        fill={fillColor}
+      />
     </svg>
   );
 }

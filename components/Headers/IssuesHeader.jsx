@@ -3,6 +3,7 @@
 import { useSidebar } from '../../hooks/useSidebar';
 import SearchBar from '../searchBar';
 import ViewTabs from '../viewTabs';
+import cn from 'classnames';
 import ViewOptionItem from '../viewOptionItem';
 import Columns from '@/assets/iconComponents/Columns';
 import Filter from '@/assets/iconComponents/Filter';
@@ -14,7 +15,10 @@ const viewOptionItems = [
   { id: 'sort', label: 'Ordering', dropdown: true, Icon: UpDownArrow },
   { id: 'filter', label: 'Filter', dropdown: false, Icon: Filter },
 ];
-
+const handleGroupSelect = (optId) => {
+  // optId will be 'status'|'priority'|'departments' from GroupMenuButton
+  setGroupBy(optId);
+};
 export default function Header({ activeView = 'list', setActiveView = () => {} }) {
   const { setMobileOpen } = useSidebar();
 

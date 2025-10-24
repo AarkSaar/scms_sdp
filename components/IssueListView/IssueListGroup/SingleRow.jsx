@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ProfileStack from './ProfileStack';
+import { useRouter } from 'next/navigation';
 import PriorityBadge from '@/components/Shared/Badges/PriorityBadge';
 import DepartmentBadge from '@/components/Shared/Badges/DepartmentBadge';
 import StatusBadge from '@/components/Shared/Badges/StatusBadge';
@@ -14,6 +15,7 @@ function formatDate(value) {
 }
 
 export default function SingleRow({ issue }) {
+  const router = useRouter();
   const badgeSet = issue.badgeSet || {};
   const priorityId = badgeSet.priority || null;
   const departmentId = badgeSet.department || null;
@@ -23,7 +25,10 @@ export default function SingleRow({ issue }) {
   const closed = issue.closedAt || null;
 
   return (
-    <div className='px-2 flex items-start justify-center hover:bg-[#0b0b0b] h-[40px]'>
+    <div
+      onClick={() => router.push(`/issues/${issue.id}`)}
+      className='px-2 flex items-start justify-center hover:bg-[#0b0b0b] h-[40px]'
+    >
       {/* Priority */}
       <div className='w-[88px] h-full flex-shrink-0 flex items-center justify-center'>
         {priorityId ? (
@@ -61,12 +66,12 @@ export default function SingleRow({ issue }) {
 
       {/* Created */}
       <div className='h-full px-2 w-[98px] items-center justify-center flex flex-shrink-0 text-[12px] text-[#bdbdbd]'>
-        {formatDate(created)}
+        {formatDate(issue.created_at)}
       </div>
 
       {/* Closed */}
       <div className='h-full px-2 w-[98px] items-center justify-center flex flex-shrink-0 text-[12px] text-[#bdbdbd]'>
-        {formatDate(closed)}
+        {formatDate(issue.closed_at) || '---'}
       </div>
     </div>
   );

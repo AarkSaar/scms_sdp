@@ -3,12 +3,11 @@
 
 import React, { useMemo } from 'react';
 import IssueBoardGroup from './IssueBoardGroup/IssueBoardGroup';
-import issuesData from '@/lib/issues.json';
 
 /**
  * BoardView
  */
-export default function BoardView({ issues = issuesData, groupBy = 'status' }) {
+export default function BoardView({ issues = [], groupBy = 'status' }) {
   const statusOrder = [
     'pending',
     'assigned',

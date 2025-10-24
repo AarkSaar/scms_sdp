@@ -8,8 +8,11 @@ import SidebarItem from './sidebarItem';
 import X from '@/assets/iconComponents/X';
 import CreateIssueButton from './createIssueButton';
 import Expand from '@/assets/iconComponents/Expand';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
+import getNameDisplay from '../Shared/NameDisplay';
 
 export default function MobileSidebar() {
+  const { profile, loading: profileLoading } = useProfile();
   const { mobileOpen, setMobileOpen } = useSidebar();
   const closeBtnRef = useRef(null);
 
@@ -122,12 +125,12 @@ export default function MobileSidebar() {
             {/* avatar + details */}
             <div className='flex items-center gap-3'>
               <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-extrabold text-black'>
-                TS
+                {getNameDisplay(profile?.name, 'short')}
               </div>
               <div className='flex flex-col gap-y-0.5'>
-                <div className='text-white text-[12px] font-semibold'>Thomas Smith</div>
+                <div className='text-white text-[12px] font-semibold'>{profile?.name}</div>
                 <div className='text-[10px] truncate text-[#aaaaaa] font-medium'>
-                  thomas.smith@aun.edu.ng
+                  {profile?.email}
                 </div>
               </div>
             </div>

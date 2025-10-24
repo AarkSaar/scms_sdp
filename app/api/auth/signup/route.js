@@ -1,71 +1,84 @@
-// app/api/signup/route.js
 import { NextResponse } from 'next/server';
-import { getSupabaseAdmin } from '@/modules/shared/supabaseAdmin';
-import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
+import getSupabaseAdmin from '@/modules/shared/supabaseAdmin';
+import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService.server';
 
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const email = (body.email || '').toString().trim();
-    const password = (body.password || '').toString();
-    const name = body.name ? String(body.name).trim() : null;
-    const username = body.username ? String(body.username).trim() : null;
+    const { name, email, password, username } = await request.json();
 
     if (!email || !password) {
-      return NextResponse.json({ error: 'email and password required' }, { status: 400 });
+      return NextResponse.json({ error: 'Email and password required' }, { status: 400 });
     }
 
-    // Create admin client
-    let supabaseAdmin;
-    try {
-      supabaseAdmin = await getSupabaseAdmin();
-    } catch (e) {
-      console.error('Missing SUPABASE_SERVICE_ROLE_KEY or client initialization failed:', e);
-      return NextResponse.json(
-        { error: 'Server config error. Contact the administrator.' },
-        { status: 500 },
-      );
-    }
+    const supabaseAdmin = getSupabaseAdmin();
 
-    // create user using the admin API
-    const { data, error: createErr } = await supabaseAdmin.auth.admin.createUser({
+    const { data: createData, error: createErr } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
-      email_confirm: true, // change as desired
+      email_confirm: true,
+      user_metadata: { full_name: name, username },
     });
 
     if (createErr) {
-      console.error('supabase admin createUser error', createErr);
-      return NextResponse.json(
-        { error: createErr.message || 'Failed to create user' },
-        { status: 500 },
-      );
+      console.error('admin.createUser error', createErr);
+      return NextResponse.json({ error: createErr.message }, { status: 500 });
     }
 
-    const createdUser = data?.user ?? data;
+    const createdUser = createData?.user ?? createData;
     if (!createdUser?.id) {
-      console.error('createUser did not return user id', data);
-      return NextResponse.json({ error: 'Failed to create user (no id)' }, { status: 500 });
+      console.error('No user id returned', createData);
+      return NextResponse.json({ error: 'User creation failed' }, { status: 500 });
     }
 
-    // upsert profile via service role: pass username and name
+    // Upsert profile
+    let profile = null;
     try {
-      await ensureProfileForAuthUser(
+      profile = await ensureProfileForAuthUser(
         { id: createdUser.id, email: createdUser.email, name, username },
-        { role_id: 'role_user' },
+        { role_id: 'role_student' },
       );
     } catch (e) {
-      console.warn('ensureProfileForAuthUser failed (non-fatal):', e);
-      // continue — the user was created in auth, but profile upsert failed
+      console.warn('Profile upsert failed (non-fatal)', e);
+      // we proceed anyway
     }
 
+    // *** Generate a session for this new user ***
+    // Approach: Use magic link / verify flow to create a session
+    const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
+      type: 'magiclink',
+      email,
+    });
+    if (linkError || !linkData?.properties?.hashed_token) {
+      console.error('generateLink failed', linkError);
+      return NextResponse.json({ error: 'Failed to generate login link' }, { status: 500 });
+    }
+
+    // Now verify that link to turn it into a session
+    const verifyResp = await supabaseAdmin.auth.verifyOtp({
+      token_hash: linkData.properties.hashed_token,
+      type: 'magiclink',
+    });
+    const session = verifyResp?.data?.session;
+    if (!session) {
+      console.error('verifyOtp did not return session', verifyResp);
+      return NextResponse.json({ error: 'Failed to create session' }, { status: 500 });
+    }
+
+    // Return profile + session tokens to client
     return NextResponse.json(
-      { data: { id: createdUser.id, email: createdUser.email } },
+      {
+        data: {
+          profile,
+          session: {
+            access_token: session.access_token,
+            refresh_token: session.refresh_token,
+          },
+        },
+      },
       { status: 201 },
     );
   } catch (err) {
-    console.error('signup route error', err);
-    // return JSON so client doesn't attempt to parse HTML
-    return NextResponse.json({ error: err?.message || 'Server error' }, { status: 500 });
+    console.error('signup route caught', err);
+    return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });
   }
 }

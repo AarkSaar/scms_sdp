@@ -1,10 +1,10 @@
+// components/IssueListView/ListView.jsx
 'use client';
 
 import React, { useMemo } from 'react';
 import ListGroup from './IssueListGroup/ListGroup';
-import issuesData from '@/lib/issues.json';
 
-export default function ListView({ issues = issuesData, groupBy = 'status' }) {
+export default function ListView({ issues = [], groupBy = 'status' }) {
   const statusOrder = [
     'pending',
     'assigned',

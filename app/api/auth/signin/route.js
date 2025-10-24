@@ -1,7 +1,7 @@
-// app/api/signin/route.js
+// app/api/auth/signin/route.js
 import { NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
-import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService';
+import { ensureProfileForAuthUser } from '@/modules/profiles/services/profilesService.server';
 
 export async function POST(request) {
   try {

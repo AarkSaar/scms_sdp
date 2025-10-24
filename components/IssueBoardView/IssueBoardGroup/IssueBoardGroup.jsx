@@ -52,12 +52,14 @@ export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy 
           {issues.map((issue) => (
             <IssueBoardCard
               key={issue.id}
+              issue={issue}
               mediaUrl={issue.mediaUrl}
               badgeSet={issue.badgeSet}
               title={issue.title}
               description={issue.description}
               dateRange={issue.dateRange}
               assignees={issue.assignees}
+              departmentId={issue.department?.id ?? issue.badgeSet?.department}
             />
           ))}
         </div>

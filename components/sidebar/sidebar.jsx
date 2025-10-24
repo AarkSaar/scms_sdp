@@ -3,14 +3,17 @@
 
 import { useState } from 'react';
 import { useSidebar } from '../../hooks/useSidebar';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 import SidebarItem from './sidebarItem';
 import SidebarLogo from './sidebarLogo';
 import navItems from '../../lib/navItems';
 import Expand from '@/assets/iconComponents/Expand';
 import CreateIssueButton from './createIssueButton';
+import getNameDisplay from '../Shared/NameDisplay';
 import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
+  const { profile, loading: profileLoading } = useProfile();
   const { collapsed, setCollapsed } = useSidebar();
   const [hovered, setHovered] = useState(false);
   const pathname = usePathname();
@@ -67,7 +70,7 @@ export default function Sidebar() {
           // collapsed view — only avatar
           <div className='w-full flex items-center justify-center p-1 hover:bg-[#1a1a1a]'>
             <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-bold text-black'>
-              TS
+              {getNameDisplay(profile?.name, 'short')}
             </div>
           </div>
         ) : (
@@ -76,12 +79,12 @@ export default function Sidebar() {
             {/* avatar + text side by side */}
             <div className='flex items-center gap-3'>
               <div className='w-[42px] h-[42px] rounded-[9.33px] bg-[#E5A13C] flex items-center justify-center text-[14px] font-extrabold text-black'>
-                TS
+                {getNameDisplay(profile?.name, 'short')}
               </div>
               <div className='flex flex-col gap-y-0.5'>
-                <div className='text-white text-[12px] font-semibold'>Thomas Smith</div>
+                <div className='text-white text-[12px] font-semibold'>{profile?.name}</div>
                 <div className='text-[10px] truncate text-[#aaaaaa] font-medium'>
-                  thomas.smith@aun.edu.ng
+                  {profile?.email}
                 </div>
               </div>
             </div>

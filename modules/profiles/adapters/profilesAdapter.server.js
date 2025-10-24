@@ -1,39 +1,42 @@
-// modules/profiles/services/profilesService.js
-import { getSupabaseAdmin } from '@/modules/shared/supabaseAdmin';
+// modules/profiles/adapters/profilesAdapter.server.js
+import getSupabaseAdmin from '@/modules/shared/supabaseAdmin';
 
 /**
- * Upsert a profile row for a Supabase auth user.
+ * Server-only profile adapter.
+ * Use the admin client to bypass RLS for administrative tasks (seed, signup upsert).
  */
-export async function ensureProfileForAuthUser(user, extra = {}) {
-  const supabaseAdmin = await getSupabaseAdmin();
-  if (!user || !user.id) {
-    throw new Error('ensureProfileForAuthUser: missing user.id');
-  }
-  const id = user.id; // uuid
-  const email = user.email ?? (user.user_metadata && user.user_metadata.email) ?? null;
-  const name =
-    user.user_metadata?.full_name ?? user.user_metadata?.name ?? user.name ?? extra?.name ?? null;
-  const username = user.username ?? extra?.username ?? null;
 
-  const row = {
-    id,
-    email,
-    name,
-    username,
-    role_id: extra.role_id ?? 'role_user',
-    metadata: extra.metadata ?? {},
-    avatar_url: extra.avatar_url ?? null,
-    created_at: new Date().toISOString(),
-  };
-
-  const { data, error } = await supabaseAdmin
-    .from('profiles')
-    .upsert(row, { returning: 'representation' }) // upsert the full row
-    .select('*');
-
-  if (error) {
+// Get profile by auth user id
+export async function getProfileById(userId) {
+  const admin = getSupabaseAdmin();
+  const { data, error } = await admin.from('profiles').select('*').eq('id', userId).single();
+  if (error && error.code !== 'PGRST116') {
+    // PGRST116 = no rows (not an actual error for our usage)
+    console.error('[getProfileById] error', error);
     throw error;
   }
+  return data || null;
+}
 
+export async function upsertProfile(profileData) {
+  const admin = getSupabaseAdmin();
+  const { data, error } = await admin
+    .from('profiles')
+    .upsert(profileData, { returning: 'representation' })
+    .select('*');
+  if (error) {
+    console.error('[upsertProfile] error', error);
+    throw error;
+  }
   return data?.[0] ?? null;
+}
+
+export async function createProfile(profileData) {
+  const admin = getSupabaseAdmin();
+  const { data, error } = await admin.from('profiles').insert(profileData).select('*').single();
+  if (error) {
+    console.error('[createProfile] error', error);
+    throw error;
+  }
+  return data;
 }

@@ -1,3 +1,4 @@
+// components/CreateIssue/CreateIssueActions.jsx
 'use client';
 
 import React from 'react';
@@ -16,7 +17,7 @@ import Send from '@/assets/iconComponents/Send';
  *  - onSubmit({ anonymous }) — called when the Submit button is clicked
  *  - onAttach() — called when clicking the add attachment area
  */
-export default function CreateIssueActions({ onSubmit, onAttach }) {
+export default function CreateIssueActions({ onSubmit, onAttach, submitting = false }) {
   const [anonymous, setAnonymous] = React.useState(false);
 
   function handleSubmit(e) {
@@ -84,10 +85,13 @@ export default function CreateIssueActions({ onSubmit, onAttach }) {
         <button
           type='button'
           onClick={handleSubmit}
-          className='bg-white text-black px-4 py-2 rounded-full flex items-center gap-3'
+          disabled={submitting}
+          className={`px-4 py-2 rounded-full flex items-center gap-3 ${
+            submitting ? 'bg-gray-400 text-black/60' : 'bg-white text-black'
+          }`}
           aria-label='Submit issue'
         >
-          <span className='text-sm font-semibold'>Submit</span>
+          <span className='text-sm font-semibold'>{submitting ? 'Submitting…' : 'Submit'}</span>
           <Send className='w-[12px] h-auto text-black' strokeWidth={1.5} />
         </button>
       </div>

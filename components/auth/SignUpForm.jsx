@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import LockIcon from '@/assets/iconComponents/LockFill';
 import { getSupabaseClient } from '@/modules/shared/supabaseClient';
 import { useRouter } from 'next/navigation';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 import { useToast } from '@/components/Shared/ToastProvider';
 import MailFill from '@/assets/iconComponents/MailFIll';
 import GoogleLogo from '@/assets/iconComponents/GoogleIcon';
@@ -13,15 +14,17 @@ import UserIcon from '@/assets/iconComponents/UserIcon';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
+  const { refresh: refreshProfile, profile, loading: profileLoading } = useProfile();
   const router = useRouter();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [showEye, setShowEye] = useState(false);
-  const client = getSupabaseClient();
 
+  // helper to wait for auth state propagation (resolve early on timeout)
   async function handleSignUp(e) {
     e.preventDefault();
     setLoading(true);
+
     const form = new FormData(e.currentTarget);
     const name = (form.get('name') || '').toString().trim();
     const email = (form.get('email') || '').toString().trim();
@@ -33,44 +36,51 @@ export default function SignUp() {
       return;
     }
 
-    // username derivation logic
+    // build a simple username
     const local = email.split('@')[0] || '';
-    const usernameBase = local
-      .toLowerCase()
-      .replace(/[^a-z0-9-_\.]/g, '')
-      .replace(/\.+/g, '.')
-      .replace(/^\.+|\.+$/g, '')
-      .slice(0, 40);
-    const username = usernameBase || `user${Date.now()}`;
+    const username =
+      local
+        .toLowerCase()
+        .replace(/[^a-z0-9-_.]/g, '')
+        .slice(0, 40) || `user${Date.now()}`;
 
     try {
-      const resp = await fetch('/api/signup', {
+      const resp = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, username }),
       });
 
-      // be defensive: if server returned HTML (error page), read as text and show
       const contentType = resp.headers.get('content-type') || '';
-      let payload;
-      if (contentType.includes('application/json')) {
-        payload = await resp.json();
-      } else {
-        payload = { error: await resp.text() };
-      }
+      const payload = contentType.includes('application/json')
+        ? await resp.json()
+        : { error: await resp.text() };
 
       if (!resp.ok) {
-        const errMsg = payload?.error || 'Sign up failed';
-        toast({
-          type: 'error',
-          message: typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg),
-        });
+        toast({ type: 'error', message: payload.error || 'Sign up failed' });
         setLoading(false);
         return;
       }
 
-      toast({ type: 'success', message: 'Sign up successful' });
-      router.push('/app/issues/all');
+      const { profile, session } = payload.data;
+
+      const supabase = getSupabaseClient();
+      if (!supabase) {
+        toast({ type: 'error', message: 'Supabase not configured in browser.' });
+        setLoading(false);
+        return;
+      }
+
+      if (session) {
+        await supabase.auth.setSession({
+          access_token: session.access_token,
+          refresh_token: session.refresh_token,
+        });
+      }
+      await new Promise((r) => setTimeout(r, 400));
+      await refreshProfile();
+      // Optionally store profile so Provider can use it immediately
+      router.push('/issues/all');
     } catch (err) {
       console.error('Sign up unexpected error', err);
       toast({ type: 'error', message: 'Something went wrong. Please try again.' });

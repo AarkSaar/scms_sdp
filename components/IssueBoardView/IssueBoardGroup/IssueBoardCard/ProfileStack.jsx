@@ -10,8 +10,20 @@ import React from 'react';
  * Renders up to `maxVisible` avatars (28x28) as rounded boxes, then a +N chip.
  */
 export default function ProfileStack({ assignees = [], maxVisible = 3 }) {
-  const visible = assignees.slice(0, maxVisible);
-  const remaining = Math.max(0, assignees.length - maxVisible);
+  // normalize inputs
+  const normalized = (assignees || []).map((p, idx) => {
+    if (!p) return { id: `unknown-${idx}`, name: 'U', avatarUrl: null };
+    if (typeof p === 'string') return { id: `name-${idx}`, name: p, avatarUrl: null };
+    // assume object
+    return {
+      id: p.id ?? `obj-${idx}`,
+      name: p.name ?? p.full_name ?? 'U',
+      avatarUrl: p.avatarUrl ?? p.avatar_url ?? null,
+    };
+  });
+
+  const visible = normalized.slice(0, maxVisible);
+  const remaining = Math.max(0, normalized.length - maxVisible);
 
   return (
     <div className='flex items-center -space-x-2.5'>
