@@ -7,7 +7,7 @@ import SignUp from '@/components/auth/SignUpForm';
 import SignIn from '@/components/auth/SignInForm';
 import BrandingSection from '@/components/auth/BrandingSection';
 import LogoName from '@/assets/iconComponents/LogoName'; // provided by you
-
+import LogoIcon from '@/assets/iconComponents/Logo';
 export default function AuthPage() {
   const [tab, setTab] = useState('SignUp'); // 'SignUp' | 'SignIn'
 
@@ -25,12 +25,13 @@ export default function AuthPage() {
       >
         {/* top row: logo + tabs */}
         <div className='flex items-center justify-between w-full px-5 lg:px-10'>
-          <img
+          {/* <img
             src='/icons/logo_name.svg'
             alt='Logo'
             className='h-7 w-auto select-none'
             draggable='false'
-          />
+          /> */}
+          <LogoIcon width={40} height={40} className='h-7 w-auto text-white' />
 
           <ViewTabs active={tab} onChange={(v) => setTab(v)} />
         </div>
