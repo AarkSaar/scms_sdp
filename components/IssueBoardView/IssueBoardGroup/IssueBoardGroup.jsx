@@ -3,23 +3,20 @@
 import React from 'react';
 import BoardGroupTitle from './BoardGroupTitle';
 import IssueBoardCard from './IssueBoardCard/IssueBoardCard';
-
-// import badge maps (only used to grab icons)
 import { priorityBadges, departmentBadges, statusBadges } from '@/lib/badges';
 
 export default function IssueBoardGroup({
   title,
-  groupKey,
+  groupKey, // <--- This is the ID (Department UUID or Priority string)
   issues = [],
   groupBy = 'status',
   departmentHeadId = null,
 }) {
   const humanLabel =
-    typeof title === 'string'
+    typeof title === 'string' && title.includes('_')
       ? title.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
       : String(title);
 
-  // choose the correct badge map based on groupBy
   const badgeMaps = {
     status: statusBadges,
     priority: priorityBadges,
@@ -27,12 +24,8 @@ export default function IssueBoardGroup({
   };
 
   const map = badgeMaps[groupBy] || {};
-  // try to find the badge info for this groupKey
   let badgeInfo = map[groupKey];
 
-  // fallback attempts:
-  // - for priority/department use 'not_set'/'unassigned' if present
-  // - otherwise fallback to null
   if (!badgeInfo) {
     if (groupBy === 'priority') badgeInfo = map['not_set'] || null;
     else if (groupBy === 'department') badgeInfo = map['unassigned'] || null;
@@ -46,7 +39,6 @@ export default function IssueBoardGroup({
       className='w-[288px] flex-shrink-0 flex flex-col h-full'
       aria-label={`${humanLabel} group`}
     >
-      {/* header: fixed height, not scrollable */}
       <div className='flex-shrink-0 bg-[#101010]'>
         <BoardGroupTitle
           label={humanLabel}
@@ -54,11 +46,11 @@ export default function IssueBoardGroup({
           Icon={Icon}
           groupBy={groupBy}
           departmentHeadId={departmentHeadId}
+          // 👇 PASS THE KEY AS GROUP ID
+          groupId={groupKey}
         />
       </div>
 
-      {/* cards list: takes remaining height and scrolls vertically */}
-      {/* hide-scrollbar here */}
       <div className='flex-1 overflow-y-auto overflow-x-hidden p-1.5 min-h-0'>
         <div className='flex flex-col w-full justify-center gap-y-1.5'>
           {issues.map((issue) => (

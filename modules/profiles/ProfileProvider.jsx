@@ -35,8 +35,13 @@ export function ProfileProvider({ children, initialProfile }) {
 
       const { data, error } = await supabase
         .from('profiles')
-        // We select all profile fields (*) AND join the roles table to get id, name, and permissions
-        .select('*, roles ( id, name, permissions )')
+        .select(
+          `
+          *,
+          roles ( id, name, permissions ),
+          sga_members ( position, department_id ) -- Fetch SGA info
+        `,
+        )
         .eq('id', user.id)
         .maybeSingle();
 

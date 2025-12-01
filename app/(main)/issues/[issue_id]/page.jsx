@@ -101,12 +101,11 @@ export default function IssuePage() {
           <div className='p-5 space-y-6'>
             <IssueInfo issue={displayIssue} loading={loading} />
 
-            {/* Description */}
             <div className='space-y-1.5'>
               <div className='flex flex-row justify-between items-center'>
                 <div className='text-[11.5px] font-semibold text-[#585858]'>Description</div>
                 <div className='p-2 hover:bg-[#2f2f2f] rounded-[8px]'>
-                  <SmileyPlus strokeWidth={1.2} className={`text-[#8e8e8e] w-auto h-3.5  `} />
+                  <SmileyPlus strokeWidth={1.2} className={`text-[#8e8e8e] w-auto h-3.5`} />
                 </div>
               </div>
               <div className='text-[15px] text-[#ddd] leading-relaxed whitespace-pre-wrap'>
@@ -116,9 +115,13 @@ export default function IssuePage() {
               </div>
             </div>
 
+            {/* Pass displayIssue.id to ThreadTabs */}
             <ThreadTabs
               activity={displayIssue?.activity ?? []}
               participants={displayIssue?.participants ?? []}
+              // 👇 Add these two props
+              // issueId={displayIssue?.id}
+              // threadId={displayIssue?.thread_id}
             />
           </div>
         </div>
