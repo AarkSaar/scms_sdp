@@ -106,21 +106,33 @@ export default function MobileSidebar() {
             <div className='space-y-[2px]'>
               <div className='px-4 py-1 text-[12px] text-[#8e8e8e] font-semibold'>Updates</div>
               <div className='space-y-[4px]'>
-                {navItems.slice(2).map((i) => (
-                  <SidebarItem
-                    key={i.id}
-                    item={i}
-                    collapsed={false}
-                    onClick={() => setMobileOpen(false)}
-                  />
-                ))}
+                {navItems
+                  .filter((i) => i.id == 'notif' || i.id == 'ann') // Only keep the item with id 'manage'
+                  .map((i) => (
+                    <SidebarItem
+                      key={i.id}
+                      item={i}
+                      collapsed={false}
+                      onClick={() => setMobileOpen(false)}
+                    />
+                  ))}
               </div>
             </div>
           </div>
         </div>
 
         {/* profile (replicated desktop profile block) */}
-        <div className='p-4'>
+        <div className='p-4 flex flex-col items-start justify-center gap-y-3.5'>
+          {navItems
+            .filter((i) => i.id === 'manage') // Only keep the item with id 'manage'
+            .map((i) => (
+              <SidebarItem
+                key={i.id}
+                item={i}
+                collapsed={false}
+                onClick={() => setMobileOpen(false)}
+              />
+            ))}
           <div className='w-full flex items-center justify-between p-1 rounded-[12px] bg-[#1a1a1a] border-[1.5px] border-[#1F1F1F]'>
             {/* avatar + details */}
             <div className='flex items-center gap-3'>

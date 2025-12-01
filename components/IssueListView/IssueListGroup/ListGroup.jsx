@@ -3,6 +3,7 @@
 import React from 'react';
 import ListGroupTitle from './ListGroupTitle';
 import SingleRow from './SingleRow';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 
 // import badge maps (used to derive icon/color if desired)
 import { priorityBadges, departmentBadges, statusBadges } from '@/lib/badges';
@@ -27,6 +28,8 @@ export default function ListGroup({
 
   const map = badgeMaps[groupBy] || {};
   let badgeInfo = map[groupKey];
+  const { profile, loading: profileLoading } = useProfile();
+  const userRole = profile?.roles?.id;
 
   // fallback attempts:
   if (!badgeInfo) {
@@ -51,7 +54,13 @@ export default function ListGroup({
           <div className='min-w-max md:min-w-full w-full'>
             {/* header row (column labels) */}
             <div className='flex h-[40px] border-b border-[#1a1a1a] items-center px-3 py-2.5 text-[12px] text-[#a9a9a9] font-semibold'>
-              <div className='w-[88px] text-center flex-shrink-0'>Priority</div>
+              <div
+                className={`${
+                  userRole == 'role_student' ? 'hidden' : 'block flex-shrink-0'
+                } w-[88px] text-center`}
+              >
+                Priority
+              </div>
               <div className='flex-1 text-center w-[400px] lg:w-full px-2 flex-shrink-0'>
                 Title / Description
               </div>

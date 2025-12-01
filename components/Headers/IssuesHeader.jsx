@@ -1,26 +1,48 @@
+// components/Headers/IssuesHeader.jsx
 'use client';
-
 import { useSidebar } from '../../hooks/useSidebar';
+import { usePathname } from 'next/navigation'; // <-- 1. Import hook for path
 import SearchBar from '../searchBar';
 import ViewTabs from '../viewTabs';
-import cn from 'classnames';
 import ViewOptionItem from '../viewOptionItem';
 import Columns from '@/assets/iconComponents/Columns';
 import Filter from '@/assets/iconComponents/Filter';
 import Equals from '@/assets/iconComponents/Equals';
 import UpDownArrow from '@/assets/iconComponents/UpDownArrow';
 
+// 2. Define grouping options structure
+const groupingOptions = [
+  { id: 'status', label: 'Status (Default)', Icon: null },
+  { id: 'priority', label: 'Priority', Icon: null },
+  { id: 'department', label: 'Department', Icon: null },
+];
+
 const viewOptionItems = [
-  { id: 'group', label: 'Grouping', dropdown: true, Icon: Columns },
+  { id: 'group', label: 'Grouping', dropdown: true, Icon: Columns, options: groupingOptions }, // <-- Grouping options added
   { id: 'sort', label: 'Ordering', dropdown: true, Icon: UpDownArrow },
   { id: 'filter', label: 'Filter', dropdown: false, Icon: Filter },
 ];
-const handleGroupSelect = (optId) => {
-  // optId will be 'status'|'priority'|'departments' from GroupMenuButton
-  setGroupBy(optId);
-};
-export default function Header({ activeView = 'list', setActiveView = () => {} }) {
+
+export default function Header({
+  activeView = 'list',
+  setActiveView = () => {},
+  onGroupChange = () => {}, // <-- 3. Accept setter function from parent
+  currentGroup = 'status', // <-- Optional: Display current grouping
+}) {
   const { setMobileOpen } = useSidebar();
+  const pathname = usePathname(); // <-- 4. Get current path
+
+  // 5. Determine screen title based on path
+  const screenTitle = pathname.includes('/issues/mine') ? 'My Issues' : 'All Issues';
+
+  // 6. Handler for grouping selection
+  const handleGroupSelect = (optId) => {
+    // optId will be 'status', 'priority', or 'department'
+    onGroupChange(optId);
+  };
+
+  // Find the 'group' item to pass the handler
+  const groupViewItem = viewOptionItems.find((i) => i.id === 'group');
 
   return (
     // non-scrolling header, fixed height within page column
@@ -36,7 +58,10 @@ export default function Header({ activeView = 'list', setActiveView = () => {} }
           >
             <Equals strokeWidth={1.5} className={`w-4 md:w-5 h-auto`} />
           </div>
-          <span className='text-white inline font-bold text-[16px] lg:text-[18px]'>All Issues</span>
+          {/* 7. DYNAMIC TITLE */}
+          <span className='text-white inline font-bold text-[16px] lg:text-[18px]'>
+            {screenTitle}
+          </span>
         </div>
         <SearchBar />
       </div>
@@ -49,10 +74,23 @@ export default function Header({ activeView = 'list', setActiveView = () => {} }
 
         <div className='flex gap-x-[8px] lg:gap-x-[12px]'>
           <div className='flex gap-x-[6px] lg:gap-x-[8px]'>
-            {viewOptionItems.slice(0, 2).map((i) => (
+            {/* Grouping Button (Slice 0) */}
+            {groupViewItem && (
+              <ViewOptionItem
+                key={groupViewItem.id}
+                item={groupViewItem}
+                onSelect={handleGroupSelect} // <-- 8. Pass the handler
+                activeOption={currentGroup} // <-- Pass active state for styling
+              />
+            )}
+
+            {/* Ordering Button (Slice 1) */}
+            {viewOptionItems.slice(1, 2).map((i) => (
               <ViewOptionItem key={i.id} item={i} />
             ))}
           </div>
+
+          {/* Filter Button (Found via find) */}
           <ViewOptionItem
             key={viewOptionItems.find((it) => it.id === 'filter').id}
             item={viewOptionItems.find((it) => it.id === 'filter')}

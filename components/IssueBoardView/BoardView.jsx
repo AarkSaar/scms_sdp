@@ -55,15 +55,29 @@ export default function BoardView({ issues = [], groupBy = 'status' }) {
   }, [issues, groupBy]);
 
   return (
-    // hide-scrollbar here
     <div className='h-full w-full overflow-x-auto overflow-y-hidden'>
-      {/* flex container with full height to pass down to children */}
       <div className='inline-flex h-full min-w-max'>
-        {groups.map((g) => (
-          <div key={g.key} className='h-full flex-shrink-0'>
-            <IssueBoardGroup groupKey={g.key} issues={g.items} groupBy={groupBy} title={g.key} />
-          </div>
-        ))}
+        {groups.map((g) => {
+          // Logic to find Department Head ID for this specific group
+          let deptHeadId = null;
+          if (groupBy === 'department' && g.items.length > 0) {
+            // Assuming the first issue in the group has the department info
+            // Adjust 'department_head_id' to match your exact DB field name
+            deptHeadId = g.items[0].department?.department_head_id || null;
+          }
+
+          return (
+            <div key={g.key} className='h-full flex-shrink-0'>
+              <IssueBoardGroup
+                groupKey={g.key}
+                issues={g.items}
+                groupBy={groupBy}
+                title={g.key}
+                departmentHeadId={deptHeadId} // <--- Pass to group
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

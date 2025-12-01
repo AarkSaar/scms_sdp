@@ -1,12 +1,7 @@
 // modules/profiles/services/profilesService.server.js
 import { upsertProfile } from '@/modules/profiles/adapters/profilesAdapter.server';
 
-/**
- * ensureProfileForAuthUser - upsert a profile row for a newly created auth user.
- * Provide `extra` to override defaults (e.g., role_id).
- *
- * NOTE: run on server only (uses admin client under the hood).
- */
+
 export async function ensureProfileForAuthUser(user, extra = {}) {
   if (!user?.id) throw new Error('ensureProfileForAuthUser: user.id missing');
 

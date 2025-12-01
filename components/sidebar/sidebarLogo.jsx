@@ -28,7 +28,7 @@ export default function SidebarLogo({ collapsed, hovered, onToggle }) {
             className='w-7 h-7 flex items-center justify-center rounded-[8px] text-[#8e8e8e] hover:bg-[#1a1a1a] focus:bg-[#1f1f1f] focus:text-white focus:outline-none cursor-e-resize'
             title='Collapse'
           >
-            <OpenPanel className='w-[16px] h-[16px]' />
+            <OpenPanel strokeWidth={1.5} className='w-[16px] h-[16px]' />
           </button>
         </div>
       ) : (

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import PriorityBadge from '@/components/Shared/Badges/PriorityBadge';
 import DepartmentBadge from '@/components/Shared/Badges/DepartmentBadge';
 import StatusBadge from '@/components/Shared/Badges/StatusBadge';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 
 function formatDate(value) {
   if (!value) return '---';
@@ -15,6 +16,8 @@ function formatDate(value) {
 }
 
 export default function SingleRow({ issue }) {
+  const { profile, loading: profileLoading } = useProfile();
+  const userRole = profile?.roles?.id;
   const router = useRouter();
   const badgeSet = issue.badgeSet || {};
   const priorityId = badgeSet.priority || null;
@@ -30,7 +33,12 @@ export default function SingleRow({ issue }) {
       className='px-2 flex items-start justify-center hover:bg-[#0b0b0b] h-[40px]'
     >
       {/* Priority */}
-      <div className='w-[88px] h-full flex-shrink-0 flex items-center justify-center'>
+      <div
+        className={`${
+          userRole === 'role_student' ? 'hidden' : 'flex flex-shrink-0'
+        } w-[88px] h-full items-center justify-center`}
+        // 👆 Added space here
+      >
         {priorityId ? (
           <div className='inline-block'>
             <PriorityBadge id={priorityId} />

@@ -2,18 +2,26 @@ import React from 'react';
 
 /**
  * AddOutline — auto-generated from SVG
+ * Icon type: stroke
+ *
+ * Props:
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function AddOutline({
   width,
   height,
-  strokeWidth = 1.02857,
+  strokeWidth = 2,
   strokeColor = 'currentColor',
   fillColor = 'none',
   className,
   ...props
 }) {
-  // viewBox: 0 0 11 11 -> aspectRatio = 11/11
   const aspectRatio = 11 / 11;
+
   let computedWidth = 11;
   let computedHeight = 11;
 
@@ -33,10 +41,11 @@ export default function AddOutline({
       width={computedWidth}
       height={computedHeight}
       viewBox='0 0 11 11'
+      fill='none'
       xmlns='http://www.w3.org/2000/svg'
       className={className}
       role='img'
-      aria-hidden={className ? 'false' : 'true'}
+      aria-hidden='true'
       {...props}
     >
       <path
@@ -45,7 +54,6 @@ export default function AddOutline({
         strokeWidth={strokeWidth}
         strokeLinecap='round'
         strokeLinejoin='round'
-        fill={fillColor}
       />
     </svg>
   );

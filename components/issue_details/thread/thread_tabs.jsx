@@ -1,3 +1,4 @@
+// C:\Users\mahdi\React\scms_sdp\components\issue_details\thread\thread_tabs.jsx
 'use client';
 
 import React, { useState } from 'react';

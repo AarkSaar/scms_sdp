@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 /**
  * More — auto-generated from SVG
+ * Icon type: stroke
+ * 
  * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function More({
   width,
   height,
   strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeColor = 'currentColor',
+  fillColor = 'none',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 11 3
   const aspectRatio = 11 / 3;
 
   let computedWidth = 11;
@@ -39,10 +41,12 @@ export default function More({
       width={computedWidth}
       height={computedHeight}
       viewBox="0 0 11 3"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-hidden={className ? "false" : "true"}
+      aria-hidden="true"
+      {...props}
     >
       <path d="M5.28571 2.07143C5.58158 2.07143 5.82143 1.83158 5.82143 1.53571C5.82143 1.23985 5.58158 1 5.28571 1C4.98985 1 4.75 1.23985 4.75 1.53571C4.75 1.83158 4.98985 2.07143 5.28571 2.07143Z" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M9.03571 2.07143C9.33158 2.07143 9.57143 1.83158 9.57143 1.53571C9.57143 1.23985 9.33158 1 9.03571 1C8.73985 1 8.5 1.23985 8.5 1.53571C8.5 1.83158 8.73985 2.07143 9.03571 2.07143Z" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>

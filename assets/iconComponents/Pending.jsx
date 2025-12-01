@@ -1,21 +1,26 @@
 import React from 'react';
 
 /**
- * Pending — auto-generated from SVG
+ * Pending — Stroke-only loading/pending icon
+ *
+ * Props:
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 1.5
+ *  - strokeColor (string) — default: "currentColor"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function Pending({
   width,
   height,
-  strokeWidth = 1.28571,
+  strokeWidth = 1.5,
   strokeColor = 'currentColor',
-  fillColor = 'none',
   className,
   ...props
 }) {
-  // viewBox 0 0 14 14
-  const aspectRatio = 14 / 14;
-  let computedWidth = 14;
-  let computedHeight = 14;
+  const aspectRatio = 16 / 16;
+
+  let computedWidth = 16;
+  let computedHeight = 16;
 
   if (width != null && height == null) {
     computedWidth = width;
@@ -32,20 +37,20 @@ export default function Pending({
     <svg
       width={computedWidth}
       height={computedHeight}
-      viewBox='0 0 14 14'
+      viewBox='0 0 16 16'
+      fill='none'
       xmlns='http://www.w3.org/2000/svg'
       className={className}
       role='img'
-      aria-hidden={className ? 'false' : 'true'}
+      aria-hidden='true'
       {...props}
     >
       <path
-        d='M5.6162 13C5.03186 12.865 4.47066 12.6418 3.95125 12.3376M8.3016 1C9.63635 1.31041 10.8281 2.07305 11.6816 3.16307C12.5352 4.25308 13 5.60589 13 7C13 8.39411 12.5352 9.74692 11.6816 10.8369C10.8281 11.927 9.63635 12.6896 8.3016 13M1.97681 10.4816C1.6106 9.93982 1.33245 9.34153 1.15307 8.7097M1 5.97459C1.10742 5.32517 1.31419 4.70992 1.60421 4.14595L1.71767 3.93745M3.53972 1.92697C4.16787 1.48666 4.87256 1.17207 5.6162 1'
+        d='M6.13569 14.7502C5.45396 14.5928 4.79923 14.3323 4.19325 13.9774M9.26866 0.750244C10.8259 1.11238 12.2162 2.00213 13.212 3.27382C14.2078 4.54551 14.7501 6.12378 14.7501 7.75024C14.7501 9.3767 14.2078 10.955 13.212 12.2267C12.2162 13.4984 10.8259 14.3881 9.26866 14.7502M1.88974 11.8121C1.46248 11.18 1.13798 10.482 0.928701 9.74489M0.750122 6.55394C0.875441 5.79627 1.11668 5.07849 1.45504 4.42052L1.58741 4.17727M3.71312 1.83171C4.44597 1.31801 5.26811 0.950998 6.13569 0.750244'
         stroke={strokeColor}
         strokeWidth={strokeWidth}
         strokeLinecap='round'
         strokeLinejoin='round'
-        fill={fillColor}
       />
     </svg>
   );

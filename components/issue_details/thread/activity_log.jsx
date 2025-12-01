@@ -1,3 +1,4 @@
+// C:\Users\mahdi\React\scms_sdp\components\issue_details\thread\activity_log.jsx
 'use client';
 
 import React from 'react';
@@ -12,14 +13,14 @@ export default function ActivityLog({ entries = [] }) {
       {entries.map((e, idx) => (
         <li key={idx} className='flex gap-3'>
           <div className='flex flex-col items-center'>
-            <div className='w-8 h-8 rounded-full bg-[#e5e7eb] text-black flex items-center justify-center text-sm'>
+            <div className='min-w-6 min-h-6 rounded-full bg-[#e5e7eb] text-black flex items-center justify-center text-xs'>
               {e.actor
                 ?.split(' ')
                 .map((s) => s[0])
                 .slice(0, 2)
                 .join('')}
             </div>
-            {idx < entries.length - 1 && <div className='w-px h-full bg-[#2a2a2a] mt-2' />}
+            {idx < entries.length - 1 && <div className='w-px h-full bg-red-300 mt-1' />}
           </div>
 
           <div className='flex-1'>

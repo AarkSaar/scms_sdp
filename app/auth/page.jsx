@@ -31,7 +31,7 @@ export default function AuthPage() {
             className='h-7 w-auto select-none'
             draggable='false'
           /> */}
-          <LogoIcon width={40} height={40} className='h-7 w-auto text-white' />
+          <LogoName width={90} height={28} className='h-7 w-auto text-white' />
 
           <ViewTabs active={tab} onChange={(v) => setTab(v)} />
         </div>
@@ -40,13 +40,7 @@ export default function AuthPage() {
           <div className='flex flex-col gap-y-12 w-full md:max-w-[440px]'>
             {/* second: logo big + title + subtext */}
             <div className='flex flex-col gap-y-5 items-start lg:items-center'>
-              {/* you mentioned a Logo.jsx too */}
-              <img
-                src='/icons/logo.svg'
-                alt='Logo'
-                className='h-17 w-auto select-none'
-                draggable='false'
-              />
+              <LogoIcon width={100} height={100} className='h-17 w-auto text-white' />
               <div className='space-y-2.5'>
                 <h1 className='text-[20px] font-bold text-white lg:text-center leading-tight'>
                   {tab === 'SignUp' ? 'HELLO THERE :)' : 'WELCOME BACK !!!'}

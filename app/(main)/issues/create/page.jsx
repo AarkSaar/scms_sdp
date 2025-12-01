@@ -1,3 +1,4 @@
+// app/(main)/issues/create/page.jsx
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -10,10 +11,10 @@ import { useToast } from '@/components/Shared/ToastProvider';
 import { useProfile } from '@/modules/profiles/ProfileProvider';
 
 export default function CreateIssuePage() {
-  const { profile } = useProfile();
+  const { profile, loading: profileLoading } = useProfile();
   const router = useRouter();
   const { toast } = useToast();
-
+  const userRole = profile?.roles?.id;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [attachments, setAttachments] = useState([]); // {id, name, size, type, file}
@@ -62,6 +63,7 @@ export default function CreateIssuePage() {
       const formData = new FormData();
       formData.append('title', title.trim());
       formData.append('description', description.trim() || '');
+      formData.append('department_id', 'none');
       formData.append('creator_id', profile?.id || '');
       formData.append('anonymous', anonymous ? 'true' : 'false');
       attachments.forEach((att) => formData.append('attachments', att.file));
@@ -96,7 +98,7 @@ export default function CreateIssuePage() {
   };
 
   return (
-    <div className='flex flex-col w-full min-w-0 h-full min-h-0'>
+    <div className={`flex flex-col w-full min-w-0 h-full min-h-0`}>
       <Header />
       <CreateIssueForm
         title={title}

@@ -7,7 +7,13 @@ import IssueBoardCard from './IssueBoardCard/IssueBoardCard';
 // import badge maps (only used to grab icons)
 import { priorityBadges, departmentBadges, statusBadges } from '@/lib/badges';
 
-export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy = 'status' }) {
+export default function IssueBoardGroup({
+  title,
+  groupKey,
+  issues = [],
+  groupBy = 'status',
+  departmentHeadId = null,
+}) {
   const humanLabel =
     typeof title === 'string'
       ? title.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
@@ -42,7 +48,13 @@ export default function IssueBoardGroup({ title, groupKey, issues = [], groupBy 
     >
       {/* header: fixed height, not scrollable */}
       <div className='flex-shrink-0 bg-[#101010]'>
-        <BoardGroupTitle label={humanLabel} count={issues.length} Icon={Icon} />
+        <BoardGroupTitle
+          label={humanLabel}
+          count={issues.length}
+          Icon={Icon}
+          groupBy={groupBy}
+          departmentHeadId={departmentHeadId}
+        />
       </div>
 
       {/* cards list: takes remaining height and scrolls vertically */}

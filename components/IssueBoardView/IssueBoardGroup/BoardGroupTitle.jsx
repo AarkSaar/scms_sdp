@@ -1,6 +1,8 @@
 import React from 'react';
+import Add from '@/assets/iconComponents/Add';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 
-// badge maps to derive icon colors (only used for coloring the icon)
+// badge maps to derive icon colors
 import { priorityBadges, departmentBadges, statusBadges } from '@/lib/badges';
 
 export default function BoardGroupTitle({
@@ -8,19 +10,44 @@ export default function BoardGroupTitle({
   count = 0,
   Icon = null,
   className = '',
+  groupBy = 'status', // Received from parent
+  departmentHeadId = null, // Received from parent (only valid if groupBy='department')
 }) {
-  // try to derive a badge key from the human label, e.g. "Needs Review" -> "needs_review"
+  const { profile } = useProfile();
+
+  // Derive Badge Info
   const badgeKey =
     typeof label === 'string'
       ? label.toString().trim().toLowerCase().replace(/\s+/g, '_')
       : String(label);
 
-  // combine maps and try to find badge info
   const allBadges = { ...priorityBadges, ...departmentBadges, ...statusBadges };
   const badgeInfo = allBadges[badgeKey] || null;
-
-  // fallback color if none found
   const iconColor = badgeInfo && badgeInfo.iconColor ? badgeInfo.iconColor : undefined;
+
+  // --- VISIBILITY LOGIC ---
+  const userRole = profile?.roles?.id;
+  const userId = profile?.id;
+
+  const isStudent = userRole === 'role_student';
+  const isPresident = userRole === 'role_president';
+  const isFaculty = userRole === 'role_sga_faculty';
+
+  // Check if SGA Member AND matches the head ID of this specific group
+  const isSgaChair =
+    userRole === 'role_sga_member' && departmentHeadId && userId === departmentHeadId;
+
+  // 1. Must be one of the allowed roles
+  const hasRolePermission = isPresident || isFaculty || isSgaChair;
+
+  // 2. Must NOT be a student (explicit check from prompt)
+  const isNotStudent = !isStudent;
+
+  // 3. Must NOT be grouped by status
+  const isAllowedGroup = groupBy !== 'status';
+
+  // Final boolean
+  const showAdd = hasRolePermission && isNotStudent && isAllowedGroup;
 
   return (
     <div
@@ -28,35 +55,39 @@ export default function BoardGroupTitle({
       role='group'
       aria-label={`${label} group header`}
     >
-      {/* left: icon + label */}
+      {/* Left: Icon + Label */}
       <div className='flex items-center gap-2'>
         {Icon ? (
           <div className='w-[18px] h-[18px] flex items-center justify-center'>
-            {/* pass className to Icon for sizing and use inline styles to color it */}
             <Icon
               className='w-[14px] h-[14px]'
               strokeWidth={1.75}
-              style={
-                iconColor ? { color: iconColor, stroke: iconColor, fill: iconColor } : undefined
-              }
+              style={iconColor ? { color: iconColor } : undefined}
             />
           </div>
         ) : (
           <div className='w-[18px] h-[18px] rounded bg-white/5' aria-hidden />
         )}
-
         <span className='text-[14px] font-semibold text-white select-none'>{label}</span>
       </div>
 
-      {/* right: count pill */}
-      <div
-        className='inline-flex items-center rounded-full px-2 py-1 bg-white'
-        aria-hidden={count == null}
-      >
-        <div className='text-[10px] font-semibold leading-[14px] text-[#0a0a0a] select-none'>
-          {count}
-          <span>{` `}Issues</span>
+      {/* Right: Count Pill + Add Button */}
+      <div className='flex flex-row items-center justify-center gap-x-2'>
+        <div
+          className='flex items-center rounded-full px-2 py-1 bg-white text-[10px] font-semibold leading-[14px] text-[#0a0a0a] select-none'
+          aria-hidden={count == null}
+        >
+          {count} Issues
         </div>
+
+        {/* CONDITIONAL RENDER */}
+        {showAdd && (
+          <div
+            className={`flex p-2 hover:bg-[#2f2f2f] rounded-[4px] items-center justify-center cursor-pointer`}
+          >
+            <Add strokeWidth={1.2} className={`w-auto h-2.5 text-[#8e8e8e]`} />
+          </div>
+        )}
       </div>
     </div>
   );

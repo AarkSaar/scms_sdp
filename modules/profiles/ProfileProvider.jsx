@@ -35,9 +35,10 @@ export function ProfileProvider({ children, initialProfile }) {
 
       const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        // We select all profile fields (*) AND join the roles table to get id, name, and permissions
+        .select('*, roles ( id, name, permissions )')
         .eq('id', user.id)
-        .maybeSingle(); // allow no rows
+        .maybeSingle();
 
       if (error) {
         if (error.code === 'PGRST116') {

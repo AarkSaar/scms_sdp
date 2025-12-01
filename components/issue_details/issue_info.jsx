@@ -1,14 +1,43 @@
+// components/issue_details/issue_info.jsx
 'use client';
 
 import React from 'react';
+// Importing specific badges as requested
+import PriorityBadge from '@/components/Shared/Badges/PriorityBadge';
+import DepartmentBadge from '@/components/Shared/Badges/DepartmentBadge';
+import StatusBadge from '@/components/Shared/Badges/StatusBadge';
+import UserLine from '@/assets/iconComponents/UserLine';
+import BranchDept from '@/assets/iconComponents/BranchDept';
+import Flag from '@/assets/iconComponents/Flag';
+import UsersLine from '@/assets/iconComponents/UsersLine';
+import Pending from '@/assets/iconComponents/Pending';
+import CalendarTime from '@/assets/iconComponents/CalendarTime';
+import Smiley from '@/assets/iconComponents/Smiley';
 
-function Badge({ children, className = '' }) {
+const iconMap = {
+  Department: BranchDept,
+  Priority: Flag,
+  Status: Pending,
+  Participants: UsersLine,
+  Duration: CalendarTime,
+  Reactions: Smiley,
+  Creator: UsersLine,
+};
+
+function IssueInfoItem({ label, children, className = '' }) {
+  const Icon = iconMap[label];
+
   return (
-    <span
-      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${className}`}
-    >
-      {children}
-    </span>
+    <div className={`flex min-h-6 flex-row items-center gap-4 ${className}`}>
+      {/* Label Column */}
+      <div className='w-28 text-[#8e8e8e] text-[11.5px] font-semibold flex flex-row items-center gap-2'>
+        {Icon ? <Icon className='w-auto h-3' strokeWidth={1.25} /> : null}
+        <span>{label}</span>
+      </div>
+
+      {/* Content Column */}
+      <div className='flex-1 min-w-0 flex flex-row flex-wrap gap-2 items-center'>{children}</div>
+    </div>
   );
 }
 
@@ -31,97 +60,96 @@ export default function IssueInfo({ issue, loading }) {
   }
 
   return (
-    <div className='space-y-4'>
-      {/* Title */}
+    <div className='space-y-6'>
+      {/* --- Header Section (Title & Attachments) --- */}
       <div>
         <h1 className='text-2xl font-semibold text-white leading-tight'>{issue.title}</h1>
-
-        {/* attachments preview (placeholders) */}
-        <div className='mt-4 flex gap-3'>
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className='w-16 h-16 rounded-md bg-[#1a1a1a]' />
-          ))}
-        </div>
+        {/* Attachments Placeholder */}
+        {issue.attachments && issue.attachments.length > 0 && (
+          <div className='mt-4 flex gap-3 overflow-x-auto pb-2'>
+            {issue.attachments.map((att, i) => (
+              <div
+                key={i}
+                className='w-16 h-16 flex-shrink-0 rounded-md bg-[#1a1a1a] border border-[#2a2a2a]'
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Core info grid */}
+      {/* --- Info Grid --- */}
       <div className='space-y-3'>
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Department</div>
-          <div className='flex-1'>
-            <Badge className='bg-[#111] text-[#dbeafe] border border-[#2b2b2b]'>
-              <svg width='14' height='14' viewBox='0 0 24 24' className='opacity-80'>
-                <circle cx='12' cy='12' r='10' fill='#3b82f6' />
-              </svg>
-              <span>{issue.department?.name ?? '—'}</span>
-            </Badge>
-          </div>
-        </div>
+        {/* Department Badge */}
+        <IssueInfoItem label='Department'>
+          <DepartmentBadge id={issue.department?.id || 'none'} />
+        </IssueInfoItem>
 
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Priority</div>
-          <div className='flex-1'>
-            <Badge className='bg-[#021431] text-[#60a5fa] border border-[#123]'>
-              {' '}
-              {issue.priority}{' '}
-            </Badge>
-          </div>
-        </div>
+        {/* Priority Badge */}
+        <IssueInfoItem label='Priority'>
+          <PriorityBadge id={issue.priority || 'medium'} />
+        </IssueInfoItem>
 
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Participants</div>
-          <div className='flex-1 flex gap-2'>
-            {issue.participants?.map((p) => (
+        {/* Status Badge */}
+        <IssueInfoItem label='Status'>
+          <StatusBadge id={issue.status || 'pending'} />
+        </IssueInfoItem>
+
+        {/* Participants */}
+        <IssueInfoItem label='Participants'>
+          {issue.participants && issue.participants.length > 0 ? (
+            issue.participants.map((p) => (
               <div
                 key={p.id}
-                className='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0f0f0f] border border-[#1f1f1f]'
+                className='inline-flex items-center gap-2 px-2 py-1 pr-3 rounded-full bg-[#0f0f0f] border border-[#1f1f1f]'
               >
-                <div className='w-6 h-6 rounded-full bg-[#e5e7eb] text-black flex items-center justify-center text-xs'>
-                  {p.name
-                    .split(' ')
-                    .map((s) => s[0])
-                    .slice(0, 2)
-                    .join('')}
+                <div className='w-5 h-5 rounded-full bg-[#2a2a2a] text-white flex items-center justify-center text-[10px] font-bold overflow-hidden'>
+                  {p.avatarUrl ? (
+                    <img src={p.avatarUrl} alt={p.name} className='w-full h-full object-cover' />
+                  ) : (
+                    (p.name || '?').substring(0, 2).toUpperCase()
+                  )}
                 </div>
-                <div className='text-sm text-white'>{p.name}</div>
+                <span className='text-sm text-[#e5e5e5]'>{p.name}</span>
               </div>
-            ))}
-          </div>
-        </div>
+            ))
+          ) : (
+            <span className='text-[#555] text-sm italic'>No participants</span>
+          )}
+        </IssueInfoItem>
 
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Status</div>
-          <div className='flex-1'>
-            <Badge className='bg-[#072f00] text-[#bbf7d0]'>{issue.status}</Badge>
-          </div>
-        </div>
+        {/* Duration */}
+        <IssueInfoItem label='Duration'>
+          <span className='text-[#ddd] text-sm pt-1'>
+            {issue.start} — {issue.end || 'Ongoing'}
+          </span>
+        </IssueInfoItem>
 
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Duration</div>
-          <div className='flex-1 text-[#ddd]'>
-            {issue.start} - {issue.end}
-          </div>
-        </div>
-
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Reactions</div>
-          <div className='flex-1 flex gap-2'>
-            {Object.entries(issue.reactions ?? {}).map(([emoji, count]) => (
+        {/* Reactions */}
+        <IssueInfoItem label='Reactions'>
+          {Object.keys(issue.reactions || {}).length > 0 ? (
+            Object.entries(issue.reactions).map(([emoji, count]) => (
               <div
                 key={emoji}
-                className='px-3 py-1 rounded-full bg-[#0f0f0f] inline-flex items-center gap-2'
+                className='px-2.5 py-1 rounded-full bg-[#0f0f0f] border border-[#1f1f1f] inline-flex items-center gap-2'
               >
-                <span className='text-lg'>{emoji}</span>
-                <span className='text-sm text-[#ddd]'>{count}</span>
+                <span className='text-sm'>{emoji}</span>
+                <span className='text-xs font-semibold text-[#888]'>{count}</span>
               </div>
-            ))}
-          </div>
-        </div>
+            ))
+          ) : (
+            <span className='text-[#555] text-sm italic'>No reactions yet</span>
+          )}
+        </IssueInfoItem>
 
-        <div className='flex items-start gap-4'>
-          <div className='w-28 text-[#8e8e8e] text-sm font-semibold'>Creator</div>
-          <div className='flex-1 text-[#ddd]'>{issue.creator?.name}</div>
-        </div>
+        {/* Creator */}
+        <IssueInfoItem label='Creator'>
+          <div className='flex items-center gap-2 pt-1'>
+            <div className='w-5 h-5 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[9px] text-white'>
+              {issue.creator?.name ? issue.creator.name.substring(0, 2).toUpperCase() : 'U'}
+            </div>
+            <span className='text-[#ddd] text-sm'>{issue.creator?.name || 'Unknown'}</span>
+          </div>
+        </IssueInfoItem>
       </div>
     </div>
   );

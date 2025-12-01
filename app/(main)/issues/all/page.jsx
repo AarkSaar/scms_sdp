@@ -15,6 +15,8 @@ export default function IssuesAllPage() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+  const userRole = profile?.roles?.id;
+  const [groupBy, setGroupBy] = useState('status');
 
   useEffect(() => {
     let mounted = true;
@@ -55,17 +57,22 @@ export default function IssuesAllPage() {
 
   return (
     <div className='flex flex-col w-full min-w-0 h-full min-h-0'>
-      <Header activeView={activeView} setActiveView={setActiveView} />
+      <Header
+        activeView={activeView}
+        setActiveView={setActiveView}
+        onGroupChange={setGroupBy}
+        currentGroup={groupBy}
+      />
 
       <div className='flex-1 px-2 py-3 overflow-hidden h-full'>
         {loading ? (
-          <div className='text-[#bfbfbf] p-4'>Loading issues…</div>
+          <div className={`p-4 text-[#bfbfbf]`}>Loading issues…</div>
         ) : err ? (
           <div className='text-red-400 p-4'>Failed to load issues (see console)</div>
         ) : activeView === 'list' ? (
-          <ListView issues={issues} />
+          <ListView issues={issues} groupBy={groupBy} />
         ) : (
-          <BoardView issues={issues} />
+          <BoardView issues={issues} groupBy={groupBy} />
         )}
       </div>
     </div>

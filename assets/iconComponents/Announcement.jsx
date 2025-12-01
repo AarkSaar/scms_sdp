@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Announcement — auto-generated from SVG
+ * Icon type: stroke
+ * 
  * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function Announcement({
   width,
   height,
   strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeColor = 'currentColor',
+  fillColor = 'none',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 11 11
   const aspectRatio = 11 / 11;
 
   let computedWidth = 11;
@@ -39,10 +41,12 @@ export default function Announcement({
       width={computedWidth}
       height={computedHeight}
       viewBox="0 0 11 11"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-hidden={className ? "false" : "true"}
+      aria-hidden="true"
+      {...props}
     >
       <path d="M5.62846 3.11285L8.20507 7.57561M8.07015 7.34117L1.71858 8.816L1.31177 8.11135L5.76482 3.34816M3.10028 8.4948L3.45002 9.10054C3.5769 9.31801 3.78496 9.47618 4.02845 9.54023C4.27192 9.60422 4.53088 9.56895 4.74833 9.44205C4.96579 9.31521 5.12394 9.10715 5.18799 8.86363C5.25204 8.62017 5.21674 8.36122 5.08986 8.14374L5.03385 8.04676M5.80368 1.83723V1M9.01139 5.04503H9.84862M1.75926 5.04503H2.59649M2.94309 2.18476L3.5351 2.77677M8.07195 2.77669L8.66393 2.18468" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
     </svg>

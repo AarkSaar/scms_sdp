@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 /**
  * OpenLockFill — auto-generated from SVG
+ * Icon type: fill
+ * 
  * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 1.5
+ *  - strokeColor (string) — default: "none"
+ *  - fillColor (string) — default: "currentColor"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function OpenLockFill({
   width,
   height,
-  strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeWidth = 1.5,
+  strokeColor = 'none',
+  fillColor = 'currentColor',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 10 12
   const aspectRatio = 10 / 12;
 
   let computedWidth = 10;
@@ -39,10 +41,12 @@ export default function OpenLockFill({
       width={computedWidth}
       height={computedHeight}
       viewBox="0 0 10 12"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-hidden={className ? "false" : "true"}
+      aria-hidden="true"
+      {...props}
     >
       <path d="M0.857143 4.08571H6.42857V2.71429C6.42857 2.19838 6.2482 1.75991 5.88743 1.39886C5.52666 1.03771 5.08857 0.857143 4.57314 0.857143C4.05771 0.857143 3.61906 1.03771 3.25714 1.39886C2.89523 1.75991 2.71429 2.19838 2.71429 2.71429H1.85714C1.85714 1.96191 2.12194 1.32143 2.65157 0.792857C3.18109 0.264286 3.82157 0 4.573 0C5.32434 0 5.96429 0.264666 6.49286 0.794C7.02143 1.32324 7.28571 1.96333 7.28571 2.71429V4.08571H8.28571C8.52143 4.08571 8.72323 4.16963 8.89114 4.33743C9.05894 4.50534 9.14286 4.70714 9.14286 4.94286V11.1429C9.14286 11.3786 9.05894 11.5803 8.89114 11.7481C8.72323 11.9161 8.52143 12 8.28571 12H0.857143C0.621429 12 0.419666 11.9161 0.251857 11.7481C0.0839515 11.5803 0 11.3786 0 11.1429V4.94286C0 4.70714 0.0839515 4.50534 0.251857 4.33743C0.419666 4.16963 0.621429 4.08571 0.857143 4.08571ZM4.57386 9.14286C4.877 9.14286 5.13571 9.03794 5.35 8.82814C5.56429 8.61834 5.67143 8.36609 5.67143 8.07143C5.67143 7.78571 5.56349 7.5262 5.34757 7.29286C5.13166 7.05951 4.87214 6.94286 4.569 6.94286C4.26586 6.94286 4.00714 7.05951 3.79286 7.29286C3.57857 7.5262 3.47143 7.78809 3.47143 8.07857C3.47143 8.36906 3.57937 8.61906 3.79529 8.82857C4.0112 9.03809 4.27071 9.14286 4.57386 9.14286Z" fill={fillColor}/>
     </svg>

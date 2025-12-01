@@ -5,6 +5,8 @@ import { useRouter, useParams } from 'next/navigation';
 import IssueHeader from '@/components/issue_details/issue_header';
 import IssueInfo from '@/components/issue_details/issue_info';
 import ThreadTabs from '@/components/issue_details/thread/thread_tabs';
+import { fetchIssueById } from '@/modules/issues/issuesService.client'; // Import service
+import SmileyPlus from '@/assets/iconComponents/SmileyPlus';
 
 export default function IssuePage() {
   const router = useRouter();
@@ -14,7 +16,6 @@ export default function IssuePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // animate in
     requestAnimationFrame(() => setMounted(true));
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -25,44 +26,21 @@ export default function IssuePage() {
 
   useEffect(() => {
     let cancelled = false;
+
     async function load() {
+      if (!issue_id) return;
       setLoading(true);
       try {
-        // TODO: replace with real API call or supabase fetch
-        // const res = await fetch(`/api/issues/${issue_id}`);
-        // const json = await res.json();
-        const fake = {
-          id: issue_id,
-          title: 'Insufficient Shuttle Buses During Peak Hours',
-          attachments: [
-            /* urls */
-          ],
-          department: { id: 'dept_transport', name: 'Transport' },
-          priority: 'Medium',
-          participants: [
-            { id: 'u1', name: 'Bashir Z' },
-            { id: 'u2', name: 'Tameem M' },
-          ],
-          status: 'Needs Review',
-          start: '2023-09-00',
-          end: '2023-09-00',
-          reactions: { '🤔': 12, '😪': 6, '😂': 3 },
-          creator: { id: 'u1', name: 'Bashir Z' },
-          description:
-            'Morning and evening peak hours (7:30–9:00 AM and 5–6 PM) have long queues at bus stops, with many students left stranded.',
-          activity: [
-            { actor: 'Bashir Z', text: 'created this issue', when: '5d ago' },
-            { actor: 'System', text: 'changed status to Pending', when: '5d ago' },
-            { actor: 'Bashir Z', text: 'flagged as Medium', when: '5d ago' },
-          ],
-        };
-        if (!cancelled) setIssue(fake);
+        const data = await fetchIssueById(issue_id); // ✅ Real API call
+        if (!cancelled) setIssue(data);
       } catch (e) {
         console.error('Failed to load issue', e);
+        // Optional: Redirect or show error state
       } finally {
         if (!cancelled) setLoading(false);
       }
     }
+
     load();
     return () => {
       cancelled = true;
@@ -70,6 +48,7 @@ export default function IssuePage() {
   }, [issue_id]);
 
   function close() {
+    // ... existing close logic
     try {
       router.back();
     } catch {
@@ -77,13 +56,32 @@ export default function IssuePage() {
     }
   }
 
+  // Helper to safely format dates
+  const formatDate = (dateStr) => {
+    if (!dateStr) return 'Ongoing';
+    return new Date(dateStr).toLocaleDateString();
+  };
+
+  // Prepare display data ensuring fields exist
+  const displayIssue = issue
+    ? {
+        ...issue,
+        start: formatDate(issue.start),
+        end: formatDate(issue.end),
+        creator: {
+          name: issue.creator?.name || 'Unknown',
+          ...issue.creator,
+        },
+      }
+    : null;
+
   return (
     <>
       {/* backdrop */}
       <div
         onClick={close}
         className={`fixed inset-0 z-40 transition-opacity duration-200 ${
-          mounted ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          mounted ? 'opacity-20' : 'opacity-0 pointer-events-none'
         }`}
         style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
         aria-hidden={!mounted}
@@ -95,25 +93,33 @@ export default function IssuePage() {
         aria-modal='true'
         className={`fixed inset-y-0 right-0 z-50 transform transition-transform duration-300 ease-out
           ${mounted ? 'translate-x-0' : 'translate-x-full'}
-          w-full md:w-[400px] lg:w-[560px] h-full flex flex-col bg-[#0b0b0b]`}
+          w-full md:w-[400px] lg:w-[560px] h-full flex flex-col bg-[#0c0c0c]`}
       >
-        <IssueHeader issue={issue} onClose={close} loading={loading} />
+        <IssueHeader issue={displayIssue} onClose={close} loading={loading} />
 
         <div className='flex-1 overflow-auto'>
           <div className='p-5 space-y-6'>
-            {/* Title + attachments shown in IssueInfo */}
-            <IssueInfo issue={issue} loading={loading} />
+            <IssueInfo issue={displayIssue} loading={loading} />
 
             {/* Description */}
-            <div>
-              <div className='text-sm text-[#8e8e8e] mb-2'>Description</div>
-              <div className='text-[15px] text-[#ddd] leading-relaxed'>
-                {loading ? 'Loading description…' : issue?.description}
+            <div className='space-y-1.5'>
+              <div className='flex flex-row justify-between items-center'>
+                <div className='text-[11.5px] font-semibold text-[#585858]'>Description</div>
+                <div className='p-2 hover:bg-[#2f2f2f] rounded-[8px]'>
+                  <SmileyPlus strokeWidth={1.2} className={`text-[#8e8e8e] w-auto h-3.5  `} />
+                </div>
+              </div>
+              <div className='text-[15px] text-[#ddd] leading-relaxed whitespace-pre-wrap'>
+                {loading
+                  ? 'Loading description…'
+                  : displayIssue?.description || 'No description provided.'}
               </div>
             </div>
 
-            {/* Thread / Tabs */}
-            <ThreadTabs activity={issue?.activity ?? []} participants={issue?.participants ?? []} />
+            <ThreadTabs
+              activity={displayIssue?.activity ?? []}
+              participants={displayIssue?.participants ?? []}
+            />
           </div>
         </div>
       </div>

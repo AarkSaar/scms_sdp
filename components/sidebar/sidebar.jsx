@@ -57,15 +57,36 @@ export default function Sidebar() {
               <div className='px-4 py-1 text-[12px] text-[#8e8e8e] font-semibold'>Updates</div>
             )}
             <div className='space-y-[4px]'>
-              {navItems.slice(2).map((i) => (
-                <SidebarItem key={i.id} item={i} collapsed={collapsed} active={isActive(i.href)} />
-              ))}
+              {navItems
+                .filter((i) => i.id == 'notif' || i.id == 'ann') // Only keep the item with id 'manage'
+                .map((i) => (
+                  <SidebarItem
+                    key={i.id}
+                    item={i}
+                    collapsed={collapsed}
+                    onClick={() => setMobileOpen(false)}
+                  />
+                ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className='flex items-center'>
+      <div
+        className={`${
+          collapsed ? ' items-center' : 'p-1 items-start'
+        } flex flex-col justify-center gap-y-3.5 w-full`}
+      >
+        {navItems
+          .filter((i) => i.id === 'manage') // Only keep the item with id 'manage'
+          .map((i) => (
+            <SidebarItem
+              key={i.id}
+              item={i}
+              collapsed={collapsed}
+              onClick={() => setMobileOpen(false)}
+            />
+          ))}
         {collapsed ? (
           // collapsed view — only avatar
           <div className='w-full flex items-center justify-center p-1 hover:bg-[#1a1a1a]'>

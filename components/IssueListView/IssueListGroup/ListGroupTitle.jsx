@@ -33,13 +33,10 @@ export default function ListGroupTitle({
       <div className='flex items-center gap-2'>
         {Icon ? (
           <div className='w-[18px] h-[18px] flex items-center justify-center'>
-            {/* pass className to Icon for sizing and use inline styles to color it */}
             <Icon
-              className='w-[16px] h-[16px]'
-              strokeWidth={1.75}
-              style={
-                iconColor ? { color: iconColor, stroke: iconColor, fill: iconColor } : undefined
-              }
+              className='w-[14px] h-[14px]'
+              strokeWidth={1.5}
+              style={iconColor ? { color: iconColor } : undefined}
             />
           </div>
         ) : (

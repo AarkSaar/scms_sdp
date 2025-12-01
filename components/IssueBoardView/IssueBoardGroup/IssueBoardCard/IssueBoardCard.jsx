@@ -3,6 +3,7 @@ import React from 'react';
 import ProfileStack from './ProfileStack';
 import { useRouter } from 'next/navigation';
 import PriorityBadge from '../../../Shared/Badges/PriorityBadge';
+import { useProfile } from '@/modules/profiles/ProfileProvider';
 import DepartmentBadge from '../../../Shared/Badges/DepartmentBadge';
 import StatusBadge from '../../../Shared/Badges/StatusBadge';
 import Calendar from '@/assets/iconComponents/Calendar';
@@ -21,6 +22,8 @@ export default function IssueBoardCard({
   const departmentIdBadge = badgeSet?.department;
   const statusId = badgeSet?.status;
   const router = useRouter();
+  const { profile, loading: profileLoading } = useProfile();
+  const userRole = profile?.roles?.id;
 
   return (
     <article
@@ -38,7 +41,9 @@ export default function IssueBoardCard({
       <div className='flex-1 bg-[#1a1a1a] px-3 py-3 flex flex-col justify-between'>
         <div className='space-y-1'>
           <div className='flex flex-wrap items-center gap-2'>
-            {priorityId && <PriorityBadge id={priorityId} />}
+            {priorityId && userRole && userRole !== 'role_student' && (
+              <PriorityBadge id={priorityId} />
+            )}
             {departmentIdBadge && <DepartmentBadge id={departmentIdBadge} />}
             {statusId && <StatusBadge id={statusId} />}
           </div>

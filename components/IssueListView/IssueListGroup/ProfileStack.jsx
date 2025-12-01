@@ -18,7 +18,7 @@ export default function ProfileStack({ assignees = [], maxVisible = 3 }) {
       {visible.map((p, idx) => (
         <div
           key={p.id ?? `${p.name}-${idx}`}
-          className='w-7 h-7 rounded-full overflow-hidden ring-0 border-[1.75px] border-[#161616] bg-[#2b2b2b] flex items-center justify-center'
+          className='w-7 h-7 rounded-full overflow-hidden ring-0 border-[1.5px] border-[#2f2f2f] bg-[#1f1f1f] flex items-center justify-center'
           title={p.name}
           style={{ zIndex: visible.length - idx }}
         >

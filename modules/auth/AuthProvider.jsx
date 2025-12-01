@@ -26,7 +26,7 @@ export default function AuthProvider({ children }) {
       .getSession()
       .then((res) => {
         if (!mounted) return;
-        const data = res?.data ?? res; // sdk versions differ; be tolerant
+        const data = res?.data ?? res;
         const session = data?.session ?? null;
         const userFromSession = data?.user ?? session?.user ?? null;
         setUser(userFromSession);

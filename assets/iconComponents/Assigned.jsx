@@ -2,18 +2,26 @@ import React from 'react';
 
 /**
  * Assigned — auto-generated from SVG
+ * Icon type: stroke
+ * 
+ * Props:
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function Assigned({
   width,
   height,
-  strokeWidth = 1.28571,
+  strokeWidth = 2,
   strokeColor = 'currentColor',
   fillColor = 'none',
   className,
   ...props
 }) {
-  // viewBox: 0 0 14 14
   const aspectRatio = 14 / 14;
+
   let computedWidth = 14;
   let computedHeight = 14;
 
@@ -32,21 +40,15 @@ export default function Assigned({
     <svg
       width={computedWidth}
       height={computedHeight}
-      viewBox='0 0 14 14'
-      xmlns='http://www.w3.org/2000/svg'
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       className={className}
-      role='img'
-      aria-hidden={className ? 'false' : 'true'}
+      role="img"
+      aria-hidden="true"
       {...props}
     >
-      <path
-        d='M6.01632 1.11004C6.76898 0.963319 7.5429 0.963319 8.29556 1.11004M10.5148 2.02773C11.152 2.45854 11.6998 3.00845 12.1283 3.64719M13.046 5.86044C13.1927 6.6131 13.1927 7.38701 13.046 8.13967M12.1283 10.3589C11.6975 10.9961 11.1476 11.5439 10.5088 11.9724M8.29556 12.8901C7.54288 13.0366 6.769 13.0366 6.01632 12.8901M3.79707 11.9724C3.15993 11.5416 2.61206 10.9917 2.18362 10.3529M1.26593 8.13967C1.1192 7.38701 1.1192 6.6131 1.26593 5.86044M2.18362 3.64119C2.61443 3.00404 3.16433 2.45617 3.80307 2.02773M7.75574 7.00006C7.75574 7.33132 7.4872 7.59985 7.15594 7.59985C6.82468 7.59985 6.55614 7.33132 6.55614 7.00006C6.55614 6.6688 6.82468 6.40026 7.15594 6.40026C7.4872 6.40026 7.75574 6.6688 7.75574 7.00006Z'
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        fill={fillColor}
-      />
+      <path d="M6.01632 1.11004C6.76898 0.963319 7.5429 0.963319 8.29556 1.11004M10.5148 2.02773C11.152 2.45854 11.6998 3.00845 12.1283 3.64719M13.046 5.86044C13.1927 6.6131 13.1927 7.38701 13.046 8.13967M12.1283 10.3589C11.6975 10.9961 11.1476 11.5439 10.5088 11.9724M8.29556 12.8901C7.54288 13.0366 6.769 13.0366 6.01632 12.8901M3.79707 11.9724C3.15993 11.5416 2.61206 10.9917 2.18362 10.3529M1.26593 8.13967C1.1192 7.38701 1.1192 6.6131 1.26593 5.86044M2.18362 3.64119C2.61443 3.00404 3.16433 2.45617 3.80307 2.02773M7.75574 7.00006C7.75574 7.33132 7.4872 7.59985 7.15594 7.59985C6.82468 7.59985 6.55614 7.33132 6.55614 7.00006C6.55614 6.6688 6.82468 6.40026 7.15594 6.40026C7.4872 6.40026 7.75574 6.6688 7.75574 7.00006Z" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }

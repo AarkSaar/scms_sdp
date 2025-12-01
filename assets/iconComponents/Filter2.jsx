@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Filter2 — auto-generated from SVG
+ * Icon type: stroke
+ * 
  * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function Filter2({
   width,
   height,
   strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeColor = 'currentColor',
+  fillColor = 'none',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 12 12
   const aspectRatio = 12 / 12;
 
   let computedWidth = 12;
@@ -39,10 +41,12 @@ export default function Filter2({
       width={computedWidth}
       height={computedHeight}
       viewBox="0 0 12 12"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-hidden={className ? "false" : "true"}
+      aria-hidden="true"
+      {...props}
     >
       <path d="M11.2857 2.92857H5.5M7.42857 9.35714H1.64286M7.42857 9.35714C7.42857 10.4223 8.29202 11.2857 9.35714 11.2857C10.4223 11.2857 11.2857 10.4223 11.2857 9.35714C11.2857 8.29202 10.4223 7.42857 9.35714 7.42857C8.29202 7.42857 7.42857 8.29202 7.42857 9.35714ZM4.85714 2.92857C4.85714 3.99369 3.99369 4.85714 2.92857 4.85714C1.86345 4.85714 1 3.99369 1 2.92857C1 1.86345 1.86345 1 2.92857 1C3.99369 1 4.85714 1.86345 4.85714 2.92857Z" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
     </svg>

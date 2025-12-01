@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Filter — auto-generated from SVG
+ * Icon type: stroke
+ * 
  * Props:
- *  - width, height (numbers) — if only one provided, the other will be computed to keep aspect ratio.
- *  - strokeWidth (number)
- *  - strokeColor (string)
- *  - fillColor (string)
- *  - className (string)
+ *  - width, height (numbers) — if only one provided, computed to keep aspect ratio
+ *  - strokeWidth (number) — default: 2
+ *  - strokeColor (string) — default: "currentColor"
+ *  - fillColor (string) — default: "none"
+ *  - className (string) — for Tailwind classes (text-* for color, w-* h-* for size)
  */
 export default function Filter({
   width,
   height,
   strokeWidth = 2,
-  strokeColor = "currentColor",
-  fillColor = "none",
+  strokeColor = 'currentColor',
+  fillColor = 'none',
   className,
+  ...props
 }) {
-  // original viewBox: 0 0 14 10
   const aspectRatio = 14 / 10;
 
   let computedWidth = 14;
@@ -39,10 +41,12 @@ export default function Filter({
       width={computedWidth}
       height={computedHeight}
       viewBox="0 0 14 10"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       role="img"
-      aria-hidden={className ? "false" : "true"}
+      aria-hidden="true"
+      {...props}
     >
       <path d="M1.15588 1H13.1559M2.43375 3.7403H11.878M5.40653 9.22082H8.90522M3.71217 6.48055H10.5996" stroke={strokeColor} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
